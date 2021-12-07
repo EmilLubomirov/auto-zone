@@ -1,0 +1,29 @@
+.header{
+    background-color: darkgray;
+}
+
+.links.main-links{
+    width: 100%;
+    margin-left: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.link-wrapper{
+    display: flex;
+    align-items: center;
+}
+
+.links a{
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+}
+
+.links a:hover{
+    text-decoration: underline;
+}
+
+.secondary-links{
+    margin-left: 50px;
+}
