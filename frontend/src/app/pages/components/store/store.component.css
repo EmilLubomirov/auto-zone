@@ -1,0 +1,26 @@
+.products-wrapper{
+    display: grid;
+    grid-template-columns: repeat(4, 22%);
+    justify-content: space-around;
+}
+
+.product-card{
+    text-align: center;
+    transition: transform .2s ease-in;
+    margin-bottom: 30px;
+}
+
+.product-card:hover{
+    cursor: pointer;
+    transform: scale(1.03);
+    box-shadow: 0 0 10px 5px lightgray;
+}
+
+.title, .price{
+    font-weight: bold;
+}
+
+.price{
+    color: red;
+    font-size: 20px;
+}

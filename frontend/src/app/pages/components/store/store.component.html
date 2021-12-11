@@ -1,0 +1,26 @@
+<div class="page-wrapper">
+  <div class="products-wrapper">
+    <div *ngFor="let product of products">
+      <mat-card class="product-card">
+        <img mat-card-image src="{{product.imageUrl}}" alt="Photo of a Product">
+        <mat-card-content>
+          <p class="title">
+           {{product.title}}
+          </p>
+        </mat-card-content>
+        <mat-card-footer>
+          <span class="price">{{product.price + ' lv.'}}</span>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
+
+  <div>
+    <mat-paginator [length]="length"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   (page)="onPageChange($event)"
+                  aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>
