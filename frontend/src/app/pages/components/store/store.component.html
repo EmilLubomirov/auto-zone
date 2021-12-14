@@ -1,24 +1,42 @@
-<div class="page-wrapper">
-  <div class="products-wrapper">
-    <div *ngFor="let product of products">
-      <mat-card class="product-card">
-        <img mat-card-image src="{{product.imageUrl}}" alt="Photo of a Product">
+<div [ngClass]="{'page-wrapper': true, 'page-loading': isLoading}">
+  <div class="main-content">
+    <div class="filter-tag">
+      <mat-card>
+        <mat-card-header class="header">
+          <h4>Tag</h4>
+        </mat-card-header>
         <mat-card-content>
-          <p class="title">
-           {{product.title}}
-          </p>
+          <div *ngFor="let productTag of productTags">
+            <section>
+              <mat-checkbox class="example-margin" color="primary" (change)="onTagChange(productTag.name, $event)">{{productTag.name}}</mat-checkbox>
+            </section>
+          </div>
         </mat-card-content>
-        <mat-card-footer>
-          <span class="price">{{product.price + ' lv.'}}</span>
-        </mat-card-footer>
       </mat-card>
+    </div>
+  
+    <div class="products-wrapper">
+      <div *ngFor="let product of products">
+        <mat-card class="product-card">
+          <img mat-card-image src="{{product.imageUrl}}" alt="Photo of a Product">
+          <mat-card-content>
+            <p class="title">
+             {{product.title}}
+            </p>
+          </mat-card-content>
+          <mat-card-footer>
+            <span class="price">{{product.price + ' lv.'}}</span>
+          </mat-card-footer>
+        </mat-card>
+      </div>
     </div>
   </div>
 
   <div>
     <mat-paginator [length]="length"
-                   [pageSize]="10"
-                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   [pageIndex]="pageIndex - 1"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="pageSizeOptions"
                    (page)="onPageChange($event)"
                   aria-label="Select page">
     </mat-paginator>

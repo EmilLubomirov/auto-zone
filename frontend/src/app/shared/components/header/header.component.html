@@ -1,4 +1,5 @@
-<mat-toolbar class="header">
+<mat-toolbar class="header" color="primary">
+    <img class="logo" src="/assets/auto-zone-logo.png">
     <div class="links main-links">
         <div class="link-wrapper">
             <mat-icon aria-hidden="false" aria-label="Example home icon">store</mat-icon>
@@ -21,13 +22,15 @@
         </div>
     </div>
 
-    <div class="links secondary-links">
-        <div class="link-wrapper">
-            <a routerLink="/login">Login</a>
-        </div>
+    <div class="user-options">
+        <button mat-raised-button routerLink="/login">
+            <mat-icon>lock_open</mat-icon>
+            Sign in
+        </button>
     
-        <div class="link-wrapper">
-            <a routerLink="/register">Register</a>
-        </div>
+        <button mat-raised-button routerLink="/register">
+            <mat-icon>exit_to_app</mat-icon>
+            Sign up
+        </button>
     </div>
 </mat-toolbar>

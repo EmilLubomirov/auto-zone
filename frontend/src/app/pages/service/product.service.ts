@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Observable, of } from 'rxjs'
 import { catchError } from 'rxjs/operators';
 
@@ -9,6 +9,7 @@ import { catchError } from 'rxjs/operators';
 export class ProductService {
   private productsUrl = 'http://localhost:9999/api/product';
   private productsCountUrl = 'http://localhost:9999/api/product/count';
+  private productTagsUrl = 'http://localhost:9999/api/product-tag';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,29 +17,36 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(): Observable<any> {
-    return this.http.post<any>(this.productsUrl, this.httpOptions)
-      .pipe(
-        catchError(this.handleError<any>('getProducts', []))
-      );
-  }
-
-  getProductsPaged(skip: number, limit: number): Observable<any> {
-    const body = {
-      skip, 
-      limit
+  getProductsPaged(page: number, size: number, selectedTags: string[]): Observable<any> {
+    const options = {
+      params: new HttpParams({fromString: `page=${page}&size=${size}&selectedTags=${selectedTags.join(',')}`})
     }
 
-    return this.http.post<any>(this.productsUrl, body, this.httpOptions)
+    return this.http.get<any>(this.productsUrl, options)
       .pipe(
         catchError(this.handleError<any>('getProducts', []))
       );
   }
 
-  getProductsCount(): Observable<any> {
-    return this.http.get<any>(this.productsCountUrl, this.httpOptions)
+  getProductsCount(selectedTags: string[]): Observable<any> {
+    const httpOptions2 = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      params: new HttpParams({fromString: "_page=1&_limit=10"})
+      // params: {
+      //   selectedTags
+      // }
+    };
+
+    return this.http.get<any>(this.productsCountUrl, httpOptions2)
       .pipe(
         catchError(this.handleError<any>('getProductsCount', []))
+      );
+  }
+
+  getProductTags(): Observable<any> {
+    return this.http.get<any>(this.productTagsUrl, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<any>('getProductTags', []))
       );
   }
 
