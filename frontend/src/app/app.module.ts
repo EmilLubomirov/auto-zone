@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
@@ -13,6 +14,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { StoreComponent } from './pages/components/store/store.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { SignUpComponent } from './pages/components/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     DefaultComponent,
     FooterComponent,
-    StoreComponent
+    StoreComponent,
+    SignUpComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +31,8 @@ import { RouterModule } from '@angular/router';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
     RouterModule
   ],

@@ -1,0 +1,26 @@
+.wrapper{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 45%;
+    height: 440px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header{
+    display: block;
+}
+
+.invalid-field{
+    position: absolute;
+    color: red;
+}
+
+.field{
+    margin-top: 20px;
+}
+
+.btn-sign-up{
+    margin-top: 10px;
+}

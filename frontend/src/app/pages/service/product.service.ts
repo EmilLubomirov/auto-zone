@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
-import { Observable, of } from 'rxjs'
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -8,7 +8,6 @@ import { catchError } from 'rxjs/operators';
 })
 export class ProductService {
   private productsUrl = 'http://localhost:9999/api/product';
-  private productsCountUrl = 'http://localhost:9999/api/product/count';
   private productTagsUrl = 'http://localhost:9999/api/product-tag';
 
   httpOptions = {
@@ -28,23 +27,8 @@ export class ProductService {
       );
   }
 
-  getProductsCount(selectedTags: string[]): Observable<any> {
-    const httpOptions2 = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-      params: new HttpParams({fromString: "_page=1&_limit=10"})
-      // params: {
-      //   selectedTags
-      // }
-    };
-
-    return this.http.get<any>(this.productsCountUrl, httpOptions2)
-      .pipe(
-        catchError(this.handleError<any>('getProductsCount', []))
-      );
-  }
-
   getProductTags(): Observable<any> {
-    return this.http.get<any>(this.productTagsUrl, this.httpOptions)
+    return this.http.get<any>(this.productTagsUrl)
       .pipe(
         catchError(this.handleError<any>('getProductTags', []))
       );
