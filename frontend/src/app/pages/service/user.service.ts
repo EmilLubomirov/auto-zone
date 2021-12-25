@@ -8,6 +8,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class UserService {
   private signUpUrl = 'http://localhost:9999/api/user/register';
+  private signInUrl = 'http://localhost:9999/api/user/login';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,6 +26,18 @@ export class UserService {
     return this.http.post<any>(this.signUpUrl, body, this.httpOptions)
       .pipe(
         catchError(this.handleError<any>('signUp', []))
+      );
+  }
+
+  signIn(username: string, password: string): Observable<any> {
+    const body = {
+      username,
+      password
+    }
+
+    return this.http.post<any>(this.signInUrl, body, { observe: 'response' })
+      .pipe(
+        catchError(this.handleError<any>('signIn', []))
       );
   }
 

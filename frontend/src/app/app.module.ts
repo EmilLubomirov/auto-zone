@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthInterceptorService } from './auth/auth-interceptor.service'; 
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
@@ -15,6 +17,7 @@ import { StoreComponent } from './pages/components/store/store.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SignUpComponent } from './pages/components/sign-up/sign-up.component';
+import { SignInComponent } from './pages/components/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,8 @@ import { SignUpComponent } from './pages/components/sign-up/sign-up.component';
     DefaultComponent,
     FooterComponent,
     StoreComponent,
-    SignUpComponent
+    SignUpComponent,
+    SignInComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +40,11 @@ import { SignUpComponent } from './pages/components/sign-up/sign-up.component';
     MaterialModule,
     RouterModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -55,7 +55,7 @@ export class SignUpComponent implements OnInit {
     get rePassword() { return this.signUpForm.get('rePassword'); }
 
     private redirectToLogin() {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/sign-in']);
     }
 
     private checkPasswords(group: FormGroup) {

@@ -1,0 +1,57 @@
+<div class="page-wrapper">
+    <mat-card class="wrapper">
+        <mat-card-header class="header">
+            <h2>Sign in</h2>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="signInForm">
+                <div>
+                    <mat-form-field class="field" appearance="legacy">
+                        <mat-label>Username</mat-label>
+                        <input matInput placeholder="Enter username..." formControlName="username">
+                        <mat-icon matSuffix>person</mat-icon>
+                    </mat-form-field>
+
+                    <div *ngIf="username.invalid && (username.dirty || username.touched)"
+                        class="alert alert-danger invalid-field">
+
+                        <div *ngIf="username.errors && username.hasError('required')">
+                            Username is required.
+                        </div>
+
+                        <div *ngIf="username.errors && username.hasError('minlength')">
+                            Username must be at least 3 characters long.
+                        </div>
+                    </div>
+
+                </div>
+                <div>
+                    <mat-form-field class="field" appearance="legacy">
+                        <mat-label>Password</mat-label>
+                        <input matInput placeholder="Enter password..." [type]="hidePass ? 'password' : 'text'"
+                            formControlName="password">
+                        <button mat-icon-button matSuffix (click)="hidePass = !hidePass"
+                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+                            <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                        class="alert alert-danger invalid-field">
+
+                        <div *ngIf="password.errors && password.hasError('required')">
+                            Password is required.
+                        </div>
+
+                        <div *ngIf="password.errors && password.hasError('minlength')">
+                            Password must be at least 6 characters long.
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+        <mat-card-footer>
+            <button mat-raised-button color="primary" class="btn-sign-up" (click)="handleSubmit()">Sign in</button>
+        </mat-card-footer>
+    </mat-card>
+</div>
