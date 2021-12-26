@@ -6,9 +6,14 @@
             <a routerLink="/store">Store</a>
         </div>
 
-        <div class="link-wrapper">
+        <div *ngIf="isLoggedIn" class="link-wrapper">
             <mat-icon aria-hidden="false" aria-label="Example home icon">time_to_leave</mat-icon>
             <a routerLink="/services">Services</a>
+        </div>
+
+        <div *ngIf="isAdmin" class="link-wrapper">
+            <mat-icon>add_circle</mat-icon>
+            <a routerLink="/add-product">Add product</a>
         </div>
 
         <div class="link-wrapper">
@@ -23,14 +28,23 @@
     </div>
 
     <div class="user-options">
-        <button mat-raised-button routerLink="/sign-in">
-            <mat-icon>lock_open</mat-icon>
-            Sign in
-        </button>
-    
-        <button mat-raised-button routerLink="/sign-up">
-            <mat-icon>exit_to_app</mat-icon>
-            Sign up
-        </button>
+        <div *ngIf="!isLoggedIn">
+            <button mat-raised-button routerLink="/sign-in">
+                <mat-icon>lock_open</mat-icon>
+                Sign in
+            </button>
+
+            <button mat-raised-button routerLink="/sign-up">
+                <mat-icon>exit_to_app</mat-icon>
+                Sign up
+            </button>
+        </div>
+
+        <div *ngIf="isLoggedIn">
+            <button mat-raised-button (click)="handleLogout()">
+                <mat-icon>directions_run</mat-icon>
+                Logout
+            </button>
+        </div>
     </div>
 </mat-toolbar>

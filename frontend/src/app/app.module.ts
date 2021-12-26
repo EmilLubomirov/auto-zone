@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SignUpComponent } from './pages/components/sign-up/sign-up.component';
 import { SignInComponent } from './pages/components/sign-in/sign-in.component';
+import { ProductDetailsComponent } from './pages/components/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SignInComponent } from './pages/components/sign-in/sign-in.component';
     FooterComponent,
     StoreComponent,
     SignUpComponent,
-    SignInComponent
+    SignInComponent,
+    ProductDetailsComponent
   ],
   imports: [
     CommonModule,

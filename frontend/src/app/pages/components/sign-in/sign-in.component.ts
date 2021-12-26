@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { StateService } from '../../service/state.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,7 +17,8 @@ export class SignInComponent implements OnInit {
     authCookieName: string = "x-auth-token";
 
   constructor(private fb: FormBuilder,
-            private userService: UserService, private router: Router, private snackBar: MatSnackBar) { }
+            private userService: UserService, private router: Router, 
+            private snackBar: MatSnackBar, private stateService: StateService) { }
 
   ngOnInit(): void {
     this.signInForm = this.fb.group({
@@ -36,11 +38,12 @@ export class SignInComponent implements OnInit {
             const authToken = response.headers.get("Authorization");
             document.cookie = `${this.authCookieName}=${authToken}`;
             this.redirectToStore();
+            this.stateService.updateCurrentUserState('');
         }
         else if (response.status === 401){
             this.openSnackBar(response.error, 'Cancel')
         }
-    }, err => console.log('lele'));
+    });
 }
 
   get username() { return this.signInForm.get('username'); }

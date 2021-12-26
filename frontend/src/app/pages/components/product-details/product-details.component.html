@@ -1,0 +1,27 @@
+<div [ngClass]="{'wrapper': true, 'page-loading': isLoading}">
+    <mat-card *ngIf="!isLoading" class="product-card">
+        <img mat-card-image src="{{product.imageUrl}}" alt="Photo of a Product">
+        <mat-card-title>
+            <p class="title">
+                {{product.title}}
+            </p>
+        </mat-card-title>
+        <mat-card-content>
+            <p class="title">
+                {{product.description}}
+            </p>
+        </mat-card-content>
+        <mat-card-footer>
+            <div class="footer">
+                <span class="price">{{product.price + ' BGN.'}}</span>
+
+                <div class="btn add-to-cart">
+                    <button mat-raised-button color="primary">
+                        <mat-icon>add_shopping_cart</mat-icon>
+                        ADD TO CART
+                    </button>
+                </div>
+            </div>
+        </mat-card-footer>
+    </mat-card>
+</div>

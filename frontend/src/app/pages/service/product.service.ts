@@ -8,6 +8,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class ProductService {
   private productsUrl = 'http://localhost:9999/api/product';
+  private productUrl = `http://localhost:9999/api/product/`
   private productTagsUrl = 'http://localhost:9999/api/product-tag';
 
   httpOptions = {
@@ -25,6 +26,13 @@ export class ProductService {
       .pipe(
         catchError(this.handleError<any>('getProducts', []))
       );
+  }
+
+  getProduct(id: string){
+    return this.http.get<any>(this.productUrl + id)
+    .pipe(
+      catchError(this.handleError<any>('getProduct', []))
+    );
   }
 
   getProductTags(): Observable<any> {
