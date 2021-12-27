@@ -1,4 +1,4 @@
 export interface ProductTag {
-    id: string;
+    _id: string;
     name: string;
 }

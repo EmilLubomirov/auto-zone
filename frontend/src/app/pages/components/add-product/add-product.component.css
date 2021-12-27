@@ -1,0 +1,18 @@
+.wrapper{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 45%;
+    height: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.invalid-field{
+    position: absolute;
+    color: red;
+}
+
+.image-uploader{
+    margin-top: 5px;
+}

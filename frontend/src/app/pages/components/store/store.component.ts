@@ -31,8 +31,8 @@ export class StoreComponent implements OnInit {
         else {
             this.selectedProductTags = [];
         }
-        
-        this.pageSize = 10
+
+        this.pageSize = 10;
     }
 
     ngOnInit(): void {

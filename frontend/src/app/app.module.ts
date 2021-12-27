@@ -19,6 +19,13 @@ import { RouterModule } from '@angular/router';
 import { SignUpComponent } from './pages/components/sign-up/sign-up.component';
 import { SignInComponent } from './pages/components/sign-in/sign-in.component';
 import { ProductDetailsComponent } from './pages/components/product-details/product-details.component';
+import { AddProductComponent } from './pages/components/add-product/add-product.component';
+import { ImageUploaderComponent } from './shared/components/image-uploader/image-uploader.component';
+import { FileUploadModule } from 'ng2-file-upload';
+import { NgxCloudinaryWidgetModule } from 'ngx-cloudinary-upload-widget';
+import { environment } from '../environments/environment';
+
+
 
 @NgModule({
   declarations: [
@@ -29,7 +36,9 @@ import { ProductDetailsComponent } from './pages/components/product-details/prod
     StoreComponent,
     SignUpComponent,
     SignInComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    AddProductComponent,
+    ImageUploaderComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +49,14 @@ import { ProductDetailsComponent } from './pages/components/product-details/prod
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    FileUploadModule,
+
+    NgxCloudinaryWidgetModule.forRoot(
+        {
+            cloudName: environment.ANGULAR_APP_CLOUD_NAME
+        }
+    )
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
