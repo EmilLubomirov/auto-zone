@@ -37,6 +37,16 @@ export class AuthService {
         return this.isAuthenticated() && decode<MyToken>(token).isAdmin;
     }
 
+    getUserId(): string {
+        const token = getCookie(authCookieName);
+
+        if (!token || !this.isAuthenticated()) {
+            return '';
+        }
+
+        return decode<MyToken>(token).id;
+    }
+
     getLoggedInUser(): Observable<User> {
 
         const authToken = getCookie(authCookieName) || "";

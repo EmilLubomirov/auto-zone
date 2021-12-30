@@ -16,7 +16,7 @@
                 <span class="price">{{product.price + ' BGN.'}}</span>
 
                 <div class="btn add-to-cart">
-                    <button mat-raised-button color="primary">
+                    <button mat-raised-button color="primary" (click)="handleAddToCartClick(product._id)">
                         <mat-icon>add_shopping_cart</mat-icon>
                         ADD TO CART
                     </button>

@@ -1,0 +1,31 @@
+<div class="page-wrapper">
+
+    <div *ngIf="cart" class="products-wrapper">
+        <div *ngFor="let cartProduct of cart.products">
+            <app-cart-product [cartProduct]="cartProduct" [userId]="userId"
+                (productQtyChangeEvent)="handleProductQtyChange($event)"
+                (productRemoveEvent)="handleProductRemove($event)"></app-cart-product>
+        </div>
+
+    </div>
+
+    <div class="price-section">
+        <div>
+            <strong>Products price: {{productsPrice}}</strong>
+        </div>
+        <div>
+            <strong>
+                Total price: {{totalPrice}}
+                <small>&#160;(*delivery included)</small>
+            </strong>
+        </div>
+        <div>
+            <div class="order-btn">
+                <button mat-raised-button color="primary" routerLink="/order/{{userId}}">Make order</button>
+            </div>
+            <div class="store-btn">
+                <button mat-raised-button color="primary" routerLink="/store">Continue shopping</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+.page-wrapper{
+    display: flex;
+}
+
+.price-section{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.store-btn{
+    margin-top: 5px;
+}

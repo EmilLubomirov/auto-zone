@@ -1,0 +1,23 @@
+<mat-card class="product-card">
+    <img mat-card-image src="{{cartProduct.product.imageUrl}}" alt="Photo of a Product">
+    <div>
+        <mat-label>Qty</mat-label>
+        <mat-select [formControl]="quantity" (selectionChange)="handleAmountChange($event)" required>
+            <mat-option *ngFor="let quantity of quantities" [value]="quantity">
+                {{quantity}}
+            </mat-option>
+        </mat-select>
+    </div>
+    <mat-card-content>
+        <a routerLink="/product/{{cartProduct.product._id}}" class="title">
+            {{cartProduct.product.title}}
+        </a>
+    </mat-card-content>
+    <mat-card-footer>
+        <span class="price">{{productEndPrice + ' BGN.'}}</span>
+    </mat-card-footer>
+
+    <div class="remove-icon">
+        <mat-icon (click)="handleProductRemove($event)">remove_circle_outline</mat-icon>
+    </div>
+</mat-card>

@@ -1,0 +1,38 @@
+.product-card{
+    display: flex;
+    padding: 30px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+img{
+    display: block;
+    max-width: 150px;
+    margin-right: 50px;
+}
+
+.title{
+    font-size: larger;
+    color: #000000;
+    margin: 0 100px 0 70px;
+    text-decoration: none;
+}
+
+.title:hover{
+    text-decoration: underline;
+}
+
+.price{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.remove-icon{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.remove-icon :hover{
+    cursor: pointer;
+}

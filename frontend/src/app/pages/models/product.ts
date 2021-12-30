@@ -3,6 +3,6 @@ export interface Product {
     title: string;
     description: string;
     imageUrl: string;
-    quantity: Number;
-    price: Number;
+    quantity: number;
+    price: number;
 }

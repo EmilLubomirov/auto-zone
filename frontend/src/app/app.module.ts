@@ -24,6 +24,8 @@ import { ImageUploaderComponent } from './shared/components/image-uploader/image
 import { FileUploadModule } from 'ng2-file-upload';
 import { NgxCloudinaryWidgetModule } from 'ngx-cloudinary-upload-widget';
 import { environment } from '../environments/environment';
+import { CartComponent } from './pages/components/cart/cart.component';
+import { CartProductComponent } from './shared/components/cart-product/cart-product.component';
 
 
 
@@ -38,7 +40,9 @@ import { environment } from '../environments/environment';
     SignInComponent,
     ProductDetailsComponent,
     AddProductComponent,
-    ImageUploaderComponent
+    ImageUploaderComponent,
+    CartComponent,
+    CartProductComponent
   ],
   imports: [
     CommonModule,

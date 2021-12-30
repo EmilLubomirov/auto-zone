@@ -25,6 +25,11 @@
             <mat-icon aria-hidden="false" aria-label="Example home icon">contacts</mat-icon>
             <a routerLink="/contacts">Contacts</a>
         </div>
+
+        <div *ngIf="isLoggedIn" class="link-wrapper">
+            <mat-icon>shopping_cart</mat-icon>
+            <a routerLink="/cart/{{userId}}">Cart</a>
+        </div>
     </div>
 
     <div class="user-options">

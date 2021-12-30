@@ -9,6 +9,7 @@ import { StateService } from 'src/app/pages/service/state.service';
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+    userId!: string;
     isLoggedIn!: boolean;
     isAdmin!: boolean;
 
@@ -29,6 +30,7 @@ export class HeaderComponent implements OnInit {
     }
 
     private updateUserState(): void {
+        this.userId = this.authService.getUserId();
         this.isLoggedIn = this.authService.isAuthenticated();
         this.isAdmin = this.authService.isAdmin();
     }
