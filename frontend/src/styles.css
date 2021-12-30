@@ -6,3 +6,14 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.snackbar, .snackbar button {
+    color: #ffffff;
+}
+.success-snackbar {
+    background: rgb(0, 187, 0);
+}
+
+.error-snackbar{
+    background: rgb(255, 0, 0);
+}

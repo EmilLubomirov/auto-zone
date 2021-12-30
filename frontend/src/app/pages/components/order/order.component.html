@@ -1,0 +1,117 @@
+<div class="page-wrapper">
+    <mat-card class="wrapper">
+        <mat-card-header class="header">
+            <h2>Order details</h2>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="orderForm">
+                <div>
+                    <mat-form-field class="field" appearance="legacy">
+                        <mat-label>First name</mat-label>
+                        <input matInput placeholder="Enter first name..." formControlName="firstName">
+                        <mat-icon matSuffix>person</mat-icon>
+                    </mat-form-field>
+
+                    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+                        class="alert alert-danger invalid-field">
+
+                        <div *ngIf="firstName.errors && firstName.hasError('required')">
+                            First name is required.
+                        </div>
+
+                        <div *ngIf="firstName.errors && firstName.hasError('minlength')">
+                            First name must be at least 2 characters long.
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <mat-form-field class="field" appearance="legacy">
+                        <mat-label>Surname</mat-label>
+                        <input matInput placeholder="Enter surname..." formControlName="surname">
+                        <mat-icon matSuffix>person</mat-icon>
+                    </mat-form-field>
+
+                    <div *ngIf="surname.invalid && (surname.dirty || surname.touched)"
+                        class="alert alert-danger invalid-field">
+
+                        <div *ngIf="surname.errors && surname.hasError('required')">
+                            Surname is required.
+                        </div>
+
+                        <div *ngIf="surname.errors && surname.hasError('minlength')">
+                            Surname must be at least 2 characters long.
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <mat-form-field class="field" appearance="legacy">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Enter email..." formControlName="email">
+                        <mat-icon matSuffix> email</mat-icon>
+                    </mat-form-field>
+
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                        class="alert alert-danger invalid-field">
+
+                        <div *ngIf="email.errors && email.hasError('required')">
+                            Email is required.
+                        </div>
+
+                        <div *ngIf="email.errors && email.hasError('email')">
+                            Email is invalid
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <mat-form-field class="field" appearance="legacy">
+                        <mat-label>Phone</mat-label>
+                        <input matInput placeholder="Enter phone..." formControlName="phone">
+                        <mat-icon matSuffix> phone</mat-icon>
+                    </mat-form-field>
+
+                    <div *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+                        class="alert alert-danger invalid-field">
+
+                        <div *ngIf="phone.errors && phone.hasError('required')">
+                            Phone is required.
+                        </div>
+
+                        <div *ngIf="phone.errors && phone.hasError('minlength')">
+                            Phone must be at least 3 characters long.
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <mat-form-field class="field" appearance="legacy">
+                        <mat-label>Address</mat-label>
+                        <input matInput placeholder="Enter address..." formControlName="address">
+                        <mat-icon matSuffix> location_on</mat-icon>
+                    </mat-form-field>
+
+                    <div *ngIf="address.invalid && (address.dirty || address.touched)"
+                        class="alert alert-danger invalid-field">
+
+                        <div *ngIf="address.errors && address.hasError('required')">
+                            Address is required.
+                        </div>
+
+                        <div *ngIf="address.errors && address.hasError('minlength')">
+                            Address must be at least 3 characters long.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="total-price">
+                    <p>Total price: {{totalPrice}} BGN.</p>
+                </div>
+            </form>
+        </mat-card-content>
+        <mat-card-footer>
+            <button mat-raised-button color="primary" class="btn-finish" (click)="handleSubmit()">Finish</button>
+        </mat-card-footer>
+    </mat-card>
+</div>

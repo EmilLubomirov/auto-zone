@@ -21,7 +21,7 @@
         </div>
         <div>
             <div class="order-btn">
-                <button mat-raised-button color="primary" routerLink="/order/{{userId}}">Make order</button>
+                <button mat-raised-button color="primary" (click)="handleOrderBtnClick()">Make order</button>
             </div>
             <div class="store-btn">
                 <button mat-raised-button color="primary" routerLink="/store">Continue shopping</button>

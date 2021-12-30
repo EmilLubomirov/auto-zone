@@ -9,6 +9,7 @@ import { ProductDetailsComponent } from './app/pages/components/product-details/
 import { SignInComponent } from './app/pages/components/sign-in/sign-in.component';
 import { SignUpComponent } from './app/pages/components/sign-up/sign-up.component';
 import { StoreComponent } from './app/pages/components/store/store.component';
+import { OrderComponent } from './app/pages/components/order/order.component';
 
 const routes: Routes = [{
   path: '', component: DefaultComponent,
@@ -18,7 +19,8 @@ const routes: Routes = [{
              { path: 'product/:id', component: ProductDetailsComponent },
              { path: 'add-product', component: AddProductComponent, 
                 canActivate: [RoleGuard], data: {  isAdmin: true } },
-            { path: 'cart/:userId', component: CartComponent, canActivate: [AuthGuard] }]
+            { path: 'cart/:userId', component: CartComponent, canActivate: [AuthGuard] },
+            { path: 'order/:userId', component: OrderComponent, canActivate: [AuthGuard] }]
 }];
 
 @NgModule({

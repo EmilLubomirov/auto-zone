@@ -1,0 +1,32 @@
+.wrapper{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 45%;
+    height: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header{
+    display: block;
+}
+
+.invalid-field{
+    position: absolute;
+    color: red;
+}
+
+.field{
+    margin-top: 20px;
+}
+
+.total-price{
+    font-weight: bold;
+    font-size: large;
+}
+
+.btn-finish{
+    width: 150px;
+    margin-top: 7px;
+}

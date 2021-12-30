@@ -26,6 +26,7 @@ import { NgxCloudinaryWidgetModule } from 'ngx-cloudinary-upload-widget';
 import { environment } from '../environments/environment';
 import { CartComponent } from './pages/components/cart/cart.component';
 import { CartProductComponent } from './shared/components/cart-product/cart-product.component';
+import { OrderComponent } from './pages/components/order/order.component';
 
 
 
@@ -42,7 +43,8 @@ import { CartProductComponent } from './shared/components/cart-product/cart-prod
     AddProductComponent,
     ImageUploaderComponent,
     CartComponent,
-    CartProductComponent
+    CartProductComponent,
+    OrderComponent
   ],
   imports: [
     CommonModule,

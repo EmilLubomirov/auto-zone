@@ -6,9 +6,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { StateService } from '../../service/state.service';
 
 @Component({
-  selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+    selector: 'app-sign-in',
+    templateUrl: './sign-in.component.html',
+    styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
     signInForm: any;
@@ -16,56 +16,65 @@ export class SignInComponent implements OnInit {
     snackbarDuration: number = 3000;
     authCookieName: string = "x-auth-token";
 
-  constructor(private fb: FormBuilder,
-            private userService: UserService, private router: Router, 
-            private snackBar: MatSnackBar, private stateService: StateService) { }
+    constructor(private fb: FormBuilder,
+                private userService: UserService, private router: Router,
+                private snackBar: MatSnackBar, private stateService: StateService) { }
 
-  ngOnInit(): void {
-    this.signInForm = this.fb.group({
-        username: ['', [Validators.required, Validators.minLength(3)]],
-        password: ['', [Validators.required, Validators.minLength(4)]]
-    });
-  }
+    ngOnInit(): void {
+        this.signInForm = this.fb.group({
+            username: ['', [Validators.required, Validators.minLength(3)]],
+            password: ['', [Validators.required, Validators.minLength(4)]]
+        });
+    }
 
-  handleSubmit(): void {
-    const {
-        username,
-        password
-    } = this.signInForm.value;
+    handleSubmit(): void {
+        const {
+            username,
+            password
+        } = this.signInForm.value;
 
-    this.userService.signIn(username, password).subscribe(response => {
-        if (response.status === 200) {
-            const authToken = response.headers.get("Authorization");
-            document.cookie = `${this.authCookieName}=${authToken}`;
-            this.redirectToStore();
-            this.stateService.updateCurrentUserState('');
+        this.userService.signIn(username, password).subscribe(response => {
+            if (response.status === 200) {
+                const authToken = response.headers.get("Authorization");
+                document.cookie = `${this.authCookieName}=${authToken}`;
+                this.redirectToStore();
+                this.stateService.updateCurrentUserState('');
+            }
+            else if (response.status === 401) {
+                this.openSnackBar(response.error, 'error', 'Cancel')
+            }
+        });
+    }
+
+    get username() { return this.signInForm.get('username'); }
+
+    get password() { return this.signInForm.get('password'); }
+
+    private showFormErrors(): void {
+        Object.keys(this.signInForm.controls).forEach(field => {
+            const control = this.signInForm.get(field);
+            control.markAsTouched({ onlySelf: true });
+        });
+    }
+
+    private openSnackBar(msg: string, type:string, action: string) {
+        const styleClass = ['snackbar'];
+
+        if (type === 'error'){
+            styleClass.push('error-snackbar');
         }
-        else if (response.status === 401){
-            this.openSnackBar(response.error, 'Cancel')
+        else if (type === 'success'){
+            styleClass.push('success-snackbar');
         }
-    });
-}
 
-  get username() { return this.signInForm.get('username'); }
+        this.snackBar.open(msg, action, {
+            duration: this.snackbarDuration,
+            panelClass: styleClass
+        });
+    }
 
-  get password() { return this.signInForm.get('password'); }
-
-  private showFormErrors(): void {
-    Object.keys(this.signInForm.controls).forEach(field => {
-        const control = this.signInForm.get(field);
-        control.markAsTouched({ onlySelf: true });
-    });
-}
-
-private openSnackBar(msg: string, action: string) {
-    console.log(msg)
-    this.snackBar.open(msg, action, {
-        duration: this.snackbarDuration
-    });
-}
-
-private redirectToStore(){
-    this.router.navigate(['/store']);
-}
+    private redirectToStore() {
+        this.router.navigate(['/store']);
+    }
 
 }

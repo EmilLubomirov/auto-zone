@@ -27,23 +27,23 @@ export class SignUpComponent implements OnInit {
     }
 
     handleSubmit(): void {
+        if (!this.signUpForm.valid) {
+            this.showFormErrors();
+            return;
+        }
+
         const {
             username,
             password,
             rePassword
         } = this.signUpForm.value;
 
-        if (!this.signUpForm.valid) {
-            this.showFormErrors();
-            return;
-        }
-
         this.userService.signUp(username, password, rePassword).subscribe(response => {
             if (response._id) {
                 this.redirectToLogin();
             }
             else {
-                this.openSnackBar('User already exists', 'Cancel')
+                this.openSnackBar('User already exists', 'error', 'Cancel')
             }
         });
     }
@@ -65,9 +65,19 @@ export class SignUpComponent implements OnInit {
         return (!rePassword || pass === rePassword) ? null : { notSame: true }
     }
 
-    private openSnackBar(msg: string, action: string) {
+    private openSnackBar(msg: string, type:string, action: string) {
+        const styleClass = ['snackbar'];
+
+        if (type === 'error'){
+            styleClass.push('error-snackbar');
+        }
+        else if (type === 'success'){
+            styleClass.push('success-snackbar');
+        }
+
         this.snackBar.open(msg, action, {
-            duration: this.snackbarDuration
+            duration: this.snackbarDuration,
+            panelClass: styleClass
         });
     }
 
