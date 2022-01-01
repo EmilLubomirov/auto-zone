@@ -27,6 +27,7 @@ import { environment } from '../environments/environment';
 import { CartComponent } from './pages/components/cart/cart.component';
 import { CartProductComponent } from './shared/components/cart-product/cart-product.component';
 import { OrderComponent } from './pages/components/order/order.component';
+import { ServicesComponent } from './pages/components/services/services.component';
 
 
 
@@ -44,7 +45,8 @@ import { OrderComponent } from './pages/components/order/order.component';
     ImageUploaderComponent,
     CartComponent,
     CartProductComponent,
-    OrderComponent
+    OrderComponent,
+    ServicesComponent
   ],
   imports: [
     CommonModule,

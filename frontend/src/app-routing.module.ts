@@ -10,6 +10,7 @@ import { SignInComponent } from './app/pages/components/sign-in/sign-in.componen
 import { SignUpComponent } from './app/pages/components/sign-up/sign-up.component';
 import { StoreComponent } from './app/pages/components/store/store.component';
 import { OrderComponent } from './app/pages/components/order/order.component';
+import { ServicesComponent } from './app/pages/components/services/services.component';
 
 const routes: Routes = [{
   path: '', component: DefaultComponent,
@@ -20,7 +21,8 @@ const routes: Routes = [{
              { path: 'add-product', component: AddProductComponent, 
                 canActivate: [RoleGuard], data: {  isAdmin: true } },
             { path: 'cart/:userId', component: CartComponent, canActivate: [AuthGuard] },
-            { path: 'order/:userId', component: OrderComponent, canActivate: [AuthGuard] }]
+            { path: 'order/:userId', component: OrderComponent, canActivate: [AuthGuard] },
+            { path: 'services', component: ServicesComponent, canActivate: [AuthGuard] }]
 }];
 
 @NgModule({
