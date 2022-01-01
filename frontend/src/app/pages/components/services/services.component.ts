@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/auth/auth.service';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { ServiceTag } from '../../models/service-tag';
 import { ServiceService } from '../../service/service.service';
 
@@ -11,12 +13,16 @@ import { ServiceService } from '../../service/service.service';
 })
 export class ServicesComponent implements OnInit {
     serviceAppointmentForm: any;
+    addServiceForm: any;
     tags!: ServiceTag[];
     minDate = new Date();
+    isAdmin!: boolean;
+    isAddServiceContent = false;
 
     constructor(private fb: FormBuilder,
         private serviceService: ServiceService,
-        private authService: AuthService) { }
+        private authService: AuthService,
+        public dialog: MatDialog) { }
 
     ngOnInit(): void {
         this.serviceAppointmentForm = this.fb.group({
@@ -29,7 +35,12 @@ export class ServicesComponent implements OnInit {
             tag: [null, Validators.required]
         });
 
+        this.addServiceForm = this.fb.group({
+            serviceName: ['', [Validators.required, Validators.minLength(2)]]
+        });
+
         this.getServiceTags();
+        this.isAdmin = this.authService.isAdmin();
     }
 
     getServiceTags(): void {
@@ -38,10 +49,37 @@ export class ServicesComponent implements OnInit {
         });
     }
 
-    handleSubmit() {
+    handleAddServiceClick(): void{
+        this.isAddServiceContent = true;
+    }
 
+    handleAddServiceSubmit(): void {
+        if (!this.addServiceForm.valid) {
+            this.showFormErrors(this.addServiceForm);
+            return;
+        }
+
+        const serviceName = this.addServiceForm.value.serviceName;
+
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+                width: '250px',
+                data: serviceName,
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result){
+                this.saveService(serviceName);
+            }
+          });
+    }
+
+    handleBackClick(): void{
+        this.isAddServiceContent = false;
+    }
+
+    handleSubmit(): void {
         if (!this.serviceAppointmentForm.valid) {
-            this.showFormErrors();
+            this.showFormErrors(this.serviceAppointmentForm);
             return;
         }
 
@@ -83,9 +121,16 @@ export class ServicesComponent implements OnInit {
 
     get tag() { return this.serviceAppointmentForm.get('tag'); }
 
-    private showFormErrors(): void {
-        Object.keys(this.serviceAppointmentForm.controls).forEach(field => {
-            const control = this.serviceAppointmentForm.get(field);
+    get serviceName() { return this.addServiceForm.get('serviceName'); }
+
+    private saveService(serviceName: string): void{
+        this.serviceService.addService(this.authService.getUserId(), serviceName)
+        .subscribe();
+    }
+
+    private showFormErrors(form: any): void {
+        Object.keys(form.controls).forEach(field => {
+            const control = form.get(field);
             control.markAsTouched({ onlySelf: true });
         });
     }

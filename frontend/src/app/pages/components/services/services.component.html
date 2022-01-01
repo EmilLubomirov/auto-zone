@@ -1,135 +1,187 @@
 <div class="page-wrapper">
-    <mat-card class="wrapper">
-        <mat-card-header class="header">
-            <h2>Do not waste your time! Make an appointment now!</h2>
-        </mat-card-header>
-        <mat-card-content>
-            <form [formGroup]="serviceAppointmentForm">
-                <div>
-                    <mat-form-field class="field" appearance="legacy">
-                        <mat-label>First name</mat-label>
-                        <input matInput placeholder="Enter first name..." formControlName="firstName">
-                        <mat-icon matSuffix>person</mat-icon>
-                    </mat-form-field>
+    <div *ngIf="!isAddServiceContent" class="template make-appointment-template">
+        <mat-card class="wrapper">
+            <mat-card-header class="header">
+                <h2>Do not waste your time! Make an appointment now!</h2>
+            </mat-card-header>
+            <mat-card-content>
+                <form [formGroup]="serviceAppointmentForm">
+                    <div>
+                        <mat-form-field class="field" appearance="legacy">
+                            <mat-label>First name</mat-label>
+                            <input matInput placeholder="Enter first name..." formControlName="firstName">
+                            <mat-icon matSuffix>person</mat-icon>
+                        </mat-form-field>
 
-                    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
-                        class="alert alert-danger invalid-field">
+                        <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+                            class="alert alert-danger invalid-field">
 
-                        <div *ngIf="firstName.errors && firstName.hasError('required')">
-                            First name is required.
-                        </div>
+                            <div *ngIf="firstName.errors && firstName.hasError('required')">
+                                First name is required.
+                            </div>
 
-                        <div *ngIf="firstName.errors && firstName.hasError('minlength')">
-                            First name must be at least 2 characters long.
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <mat-form-field class="field" appearance="legacy">
-                        <mat-label>Surname</mat-label>
-                        <input matInput placeholder="Enter surname..." formControlName="surname">
-                        <mat-icon matSuffix>person</mat-icon>
-                    </mat-form-field>
-
-                    <div *ngIf="surname.invalid && (surname.dirty || surname.touched)"
-                        class="alert alert-danger invalid-field">
-
-                        <div *ngIf="surname.errors && surname.hasError('required')">
-                            Surname is required.
-                        </div>
-
-                        <div *ngIf="surname.errors && surname.hasError('minlength')">
-                            Surname must be at least 2 characters long.
+                            <div *ngIf="firstName.errors && firstName.hasError('minlength')">
+                                First name must be at least 2 characters long.
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div>
-                    <mat-form-field class="field" appearance="legacy">
-                        <mat-label>Phone</mat-label>
-                        <input matInput placeholder="Enter phone..." formControlName="phone">
-                        <mat-icon matSuffix> phone</mat-icon>
-                    </mat-form-field>
+                    <div>
+                        <mat-form-field class="field" appearance="legacy">
+                            <mat-label>Surname</mat-label>
+                            <input matInput placeholder="Enter surname..." formControlName="surname">
+                            <mat-icon matSuffix>person</mat-icon>
+                        </mat-form-field>
 
-                    <div *ngIf="phone.invalid && (phone.dirty || phone.touched)"
-                        class="alert alert-danger invalid-field">
+                        <div *ngIf="surname.invalid && (surname.dirty || surname.touched)"
+                            class="alert alert-danger invalid-field">
 
-                        <div *ngIf="phone.errors && phone.hasError('required')">
-                            Phone is required.
-                        </div>
+                            <div *ngIf="surname.errors && surname.hasError('required')">
+                                Surname is required.
+                            </div>
 
-                        <div *ngIf="phone.errors && phone.hasError('minlength')">
-                            Phone must be at least 3 characters long.
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <mat-form-field class="field" appearance="legacy">
-                        <mat-label>Car license plate</mat-label>
-                        <input matInput placeholder="Enter car license plate..." formControlName="carLicensePlate">
-                        <mat-icon matSuffix> directions_car</mat-icon>
-                    </mat-form-field>
-
-                    <div *ngIf="carLicensePlate.invalid && (carLicensePlate.dirty || carLicensePlate.touched)"
-                        class="alert alert-danger invalid-field">
-
-                        <div *ngIf="carLicensePlate.errors && carLicensePlate.hasError('required')">
-                            Car license plate is required.
-                        </div>
-
-                        <div *ngIf="carLicensePlate.errors && carLicensePlate.hasError('minlength')">
-                            Car license plate must be at least 3 characters long.
+                            <div *ngIf="surname.errors && surname.hasError('minlength')">
+                                Surname must be at least 2 characters long.
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="date">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Choose date</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="date">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
+                    <div>
+                        <mat-form-field class="field" appearance="legacy">
+                            <mat-label>Phone</mat-label>
+                            <input matInput placeholder="Enter phone..." formControlName="phone">
+                            <mat-icon matSuffix> phone</mat-icon>
+                        </mat-form-field>
 
-                    <div *ngIf="date.invalid && (date.dirty || date.touched)" class="alert alert-danger invalid-field">
+                        <div *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+                            class="alert alert-danger invalid-field">
 
-                        <div *ngIf="date.errors && date.hasError('required')">
-                            Date is required.
+                            <div *ngIf="phone.errors && phone.hasError('required')">
+                                Phone is required.
+                            </div>
+
+                            <div *ngIf="phone.errors && phone.hasError('minlength')">
+                                Phone must be at least 3 characters long.
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div>
-                    <input [formControl]="hour" type="time" id="appt" name="appt" min="09:00" max="19:00" required>
-                    <div *ngIf="hour.invalid && (hour.dirty || hour.touched)" class="alert alert-danger invalid-field">
+                    <div>
+                        <mat-form-field class="field" appearance="legacy">
+                            <mat-label>Car license plate</mat-label>
+                            <input matInput placeholder="Enter car license plate..." formControlName="carLicensePlate">
+                            <mat-icon matSuffix> directions_car</mat-icon>
+                        </mat-form-field>
 
-                        <div *ngIf="hour.errors && hour.hasError('required')">
-                            Hour is required.
+                        <div *ngIf="carLicensePlate.invalid && (carLicensePlate.dirty || carLicensePlate.touched)"
+                            class="alert alert-danger invalid-field">
+
+                            <div *ngIf="carLicensePlate.errors && carLicensePlate.hasError('required')">
+                                Car license plate is required.
+                            </div>
+
+                            <div *ngIf="carLicensePlate.errors && carLicensePlate.hasError('minlength')">
+                                Car license plate must be at least 3 characters long.
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div>
-                    <mat-label>Tag</mat-label>
-                    <mat-select [formControl]="tag" required>
-                        <mat-option *ngFor="let tag of tags" [value]="tag">
-                            {{tag.name}}
-                        </mat-option>
-                    </mat-select>
+                    <div class="date">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Choose date</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="date">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
 
-                    <div *ngIf="tag.invalid && (tag.dirty || tag.touched)" class="alert alert-danger invalid-field">
+                        <div *ngIf="date.invalid && (date.dirty || date.touched)"
+                            class="alert alert-danger invalid-field">
 
-                        <div *ngIf="tag.errors && tag.hasError('required')">
-                            Tag is required.
+                            <div *ngIf="date.errors && date.hasError('required')">
+                                Date is required.
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
-        </mat-card-content>
-        <mat-card-footer>
-            <button mat-raised-button color="primary" class="btn-finish" (click)="handleSubmit()">Finish</button>
-        </mat-card-footer>
-    </mat-card>
+
+                    <div>
+                        <input [formControl]="hour" type="time" id="appt" name="appt" min="09:00" max="19:00" required>
+                        <div *ngIf="hour.invalid && (hour.dirty || hour.touched)"
+                            class="alert alert-danger invalid-field">
+
+                            <div *ngIf="hour.errors && hour.hasError('required')">
+                                Hour is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <mat-label>Tag</mat-label>
+                        <mat-select [formControl]="tag" required>
+                            <mat-option *ngFor="let tag of tags" [value]="tag">
+                                {{tag.name}}
+                            </mat-option>
+                        </mat-select>
+
+                        <div *ngIf="tag.invalid && (tag.dirty || tag.touched)" class="alert alert-danger invalid-field">
+
+                            <div *ngIf="tag.errors && tag.hasError('required')">
+                                Tag is required.
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+            <mat-card-footer>
+                <button mat-raised-button color="primary" class="btn-finish" (click)="handleSubmit()">Finish</button>
+            </mat-card-footer>
+        </mat-card>
+
+        <div *ngIf="!isAddServiceContent && isAdmin">
+            <button mat-raised-button color="primary" class="btn add-service" (click)="handleAddServiceClick()">
+                <mat-icon>add</mat-icon>
+                Add service
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="isAddServiceContent && isAdmin" class="template add-service-template">
+        <div>
+            <button mat-raised-button color="primary" class="btn back" (click)="handleBackClick()">
+                <mat-icon>arrow_back</mat-icon>
+                Back
+            </button>
+        </div>
+
+        <mat-card class="wrapper add-service-form-wrapper">
+            <mat-card-header class="header">
+                <h2>Add Service</h2>
+            </mat-card-header>
+            <mat-card-content>
+                <form [formGroup]="addServiceForm">
+                    <div>
+                        <mat-form-field class="field" appearance="legacy">
+                            <mat-label>Service name</mat-label>
+                            <input matInput placeholder="Enter service name..." formControlName="serviceName">
+                        </mat-form-field>
+
+                        <div *ngIf="serviceName.invalid && (serviceName.dirty || serviceName.touched)"
+                            class="alert alert-danger invalid-field">
+
+                            <div *ngIf="serviceName.errors && serviceName.hasError('required')">
+                                Service name is required.
+                            </div>
+
+                            <div *ngIf="serviceName.errors && serviceName.hasError('minlength')">
+                                Service name must be at least 2 characters long.
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+            <mat-card-footer>
+                <button mat-raised-button color="primary" class="btn-finish"
+                    (click)="handleAddServiceSubmit()">Save</button>
+            </mat-card-footer>
+        </mat-card>
+    </div>
 </div>

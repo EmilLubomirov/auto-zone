@@ -8,6 +8,14 @@
     text-align: center;
 }
 
+.template{
+    display: flex;
+}
+
+.add-service-template{
+    min-height: 65vh;
+}
+
 .header{
     display: block;
 }
@@ -27,4 +35,12 @@
 
 .btn-sign-up{
     margin-top: 10px;
+}
+
+.wrapper.add-service-form-wrapper{
+    height: 300px;
+}
+
+.btn.add-service{
+    height: 40px;
 }

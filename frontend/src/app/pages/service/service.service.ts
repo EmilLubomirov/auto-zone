@@ -10,6 +10,7 @@ import { ServiceTag } from '../models/service-tag';
 export class ServiceService {
     private serviceTagsUrl = 'http://localhost:9999/api/service-tag';
     private makeAppointmentUrl = 'http://localhost:9999/api/service';
+    private addServiceTagUrl = 'http://localhost:9999/api/service-tag/add';
 
     constructor(private http: HttpClient) { }
 
@@ -20,8 +21,8 @@ export class ServiceService {
             );
     }
 
-    makeAppointment(userId: string, firstName: string, surname: string, 
-                    phoneNumber: string, carLicensePlate: string, date: Date, tag: string): Observable<any> {
+    makeAppointment(userId: string, firstName: string, surname: string,
+        phoneNumber: string, carLicensePlate: string, date: Date, tag: string): Observable<any> {
         const body = {
             userId,
             firstName,
@@ -35,6 +36,18 @@ export class ServiceService {
         return this.http.post<any>(this.makeAppointmentUrl, body, { observe: "response" })
             .pipe(
                 catchError(this.handleError<any>('makeAppointment', []))
+            );
+    }
+
+    addService(userId: string, serviceName: string): Observable<ServiceTag> {
+        const body = {
+            userId,
+            serviceName
+        };
+
+        return this.http.post<any>(this.addServiceTagUrl, body, { observe: "response" })
+            .pipe(
+                catchError(this.handleError<any>('addService', []))
             );
     }
 

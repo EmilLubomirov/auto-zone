@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class UserService {
       rePassword
     }
 
-    return this.http.post<any>(this.signUpUrl, body, this.httpOptions)
+    return this.http.post<any>(this.signUpUrl, body, {observe: "response"})
       .pipe(
         catchError(this.handleError<any>('signUp', []))
       );
@@ -43,8 +43,8 @@ export class UserService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
-      return of(result as T);
+        console.error(error);
+        return throwError(error);
     };
   }
 }

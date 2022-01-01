@@ -28,6 +28,7 @@ import { CartComponent } from './pages/components/cart/cart.component';
 import { CartProductComponent } from './shared/components/cart-product/cart-product.component';
 import { OrderComponent } from './pages/components/order/order.component';
 import { ServicesComponent } from './pages/components/services/services.component';
+import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 
 
 
@@ -46,7 +47,8 @@ import { ServicesComponent } from './pages/components/services/services.componen
     CartComponent,
     CartProductComponent,
     OrderComponent,
-    ServicesComponent
+    ServicesComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,

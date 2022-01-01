@@ -42,9 +42,9 @@ export class SignUpComponent implements OnInit {
             if (response._id) {
                 this.redirectToLogin();
             }
-            else {
-                this.openSnackBar('User already exists', 'error', 'Cancel')
-            }
+        }, error => {
+            const { message } = error.error.error;
+            this.openSnackBar(message, 'error', 'Cancel')
         });
     }
 
