@@ -1,0 +1,25 @@
+.page-wrapper{
+    font-size: larger;
+}
+
+.important{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.description{
+    font-size: medium;
+    line-height: 1.8;
+}
+
+.content{
+    display: flex;
+}
+
+img {
+    display: block;
+    max-height: unset;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 4px;
+}

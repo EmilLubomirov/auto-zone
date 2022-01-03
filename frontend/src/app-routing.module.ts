@@ -11,12 +11,16 @@ import { SignUpComponent } from './app/pages/components/sign-up/sign-up.componen
 import { StoreComponent } from './app/pages/components/store/store.component';
 import { OrderComponent } from './app/pages/components/order/order.component';
 import { ServicesComponent } from './app/pages/components/services/services.component';
+import { AboutComponent } from './app/pages/components/about/about.component';
+import { ContactsComponent } from './app/pages/components/contacts/contacts.component';
 
 const routes: Routes = [{
   path: '', component: DefaultComponent,
   children: [{ path: 'store', component: StoreComponent }, 
              { path: 'sign-up', component: SignUpComponent },
              { path: 'sign-in', component: SignInComponent },
+             { path: 'about', component: AboutComponent },
+             { path: 'contacts', component: ContactsComponent },
              { path: 'product/:id', component: ProductDetailsComponent },
              { path: 'add-product', component: AddProductComponent, 
                 canActivate: [RoleGuard], data: {  isAdmin: true } },

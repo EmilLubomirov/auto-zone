@@ -20,6 +20,11 @@
     display: block;
 }
 
+.note{
+    color: red;
+    margin-top: 40px;
+}
+
 .invalid-field{
     position: absolute;
     color: red;

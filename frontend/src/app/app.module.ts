@@ -29,6 +29,10 @@ import { CartProductComponent } from './shared/components/cart-product/cart-prod
 import { OrderComponent } from './pages/components/order/order.component';
 import { ServicesComponent } from './pages/components/services/services.component';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
+import { AboutComponent } from './pages/components/about/about.component';
+import { ContactsComponent } from './pages/components/contacts/contacts.component';
+import { MapComponent } from './shared/components/map/map.component';
+import { SafePipe } from './utils/safe.pipe';
 
 
 
@@ -48,7 +52,11 @@ import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confi
     CartProductComponent,
     OrderComponent,
     ServicesComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    AboutComponent,
+    ContactsComponent,
+    MapComponent,
+    SafePipe
   ],
   imports: [
     CommonModule,
