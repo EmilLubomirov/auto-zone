@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RoleGuardService as RoleGuard } from './app/auth/role-guard.service';
 import { AuthGuardService as AuthGuard } from './app/auth/auth-guard.service';
+import { GuestGuardService as GuestGuard } from './app/auth/guest-guard.service';
 import { DefaultComponent } from './app/layouts/default/default.component';
 import { AddProductComponent } from './app/pages/components/add-product/add-product.component';
 import { CartComponent } from './app/pages/components/cart/cart.component';
@@ -17,8 +18,8 @@ import { ContactsComponent } from './app/pages/components/contacts/contacts.comp
 const routes: Routes = [{
   path: '', component: DefaultComponent,
   children: [{ path: 'store', component: StoreComponent }, 
-             { path: 'sign-up', component: SignUpComponent },
-             { path: 'sign-in', component: SignInComponent },
+             { path: 'sign-up', component: SignUpComponent, canActivate: [GuestGuard] },
+             { path: 'sign-in', component: SignInComponent, canActivate: [GuestGuard] },
              { path: 'about', component: AboutComponent },
              { path: 'contacts', component: ContactsComponent },
              { path: 'product/:id', component: ProductDetailsComponent },
