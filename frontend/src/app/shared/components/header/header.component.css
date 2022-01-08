@@ -8,14 +8,12 @@
 
 .logo{
     display: block;
-    position: absolute;
-    top: 8px;
-    width: 9%;
+    margin-top: 40px;
+    width: 100px;
 }
 
 .links.main-links{
     width: 100%;
-    margin-left: 60px;
     display: flex;
     justify-content: space-around;
 }
@@ -35,7 +33,6 @@
     text-decoration: underline;
 }
 
-
 .user-options button{
     font-size: 15px;
     width: 100px;
@@ -46,4 +43,74 @@
 
 .user-options .mat-icon{
     font-size: 20px;
+}
+
+@media only screen and (max-width: 800px) {
+    .header{
+        position: unset;
+    }
+
+    .header.admin{
+        height: 340px;
+        flex-flow: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header.admin .logo{
+        width: 80px;
+        margin-top: 5px;
+    }
+
+    .header.admin .user-options button{
+        display: block;
+    }
+
+    .header.admin .links.main-links{
+        width: auto;
+        margin-left: 0;
+        height: 120px;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-around;
+    }
+
+    .links a{
+        font-size: 16px;
+    }
+
+    .btn.logout{
+        margin-bottom: 5px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .header{
+        height: 300px;
+        flex-flow: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo{
+        width: 80px;
+        margin-top: 5px;
+    }
+
+    .user-options button{
+        display: block;
+    }
+
+    .btn.sign-up{
+        margin-top: 5px;
+    }
+
+    .links.main-links{
+        width: auto;
+        margin-left: 0;
+        height: 120px;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-around;
+    }
 }

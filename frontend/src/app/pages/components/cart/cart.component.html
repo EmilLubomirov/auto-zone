@@ -19,8 +19,8 @@
                 <small>&#160;(*delivery included)</small>
             </strong>
         </div>
-        <div>
-            <div class="order-btn">
+        <div class="buttons">
+            <div *ngIf="cart && cart.products" class="order-btn">
                 <button mat-raised-button color="primary" (click)="handleOrderBtnClick()">Make order</button>
             </div>
             <div class="store-btn">

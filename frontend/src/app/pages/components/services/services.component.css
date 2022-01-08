@@ -3,7 +3,6 @@
     flex-flow: column;
     align-items: center;
     width: 45%;
-    height: 700px;
     margin: 0 auto;
     text-align: center;
 }
@@ -48,4 +47,8 @@
 
 .btn.add-service{
     height: 40px;
+}
+
+.btn-finish{
+    margin: 10px 0;
 }

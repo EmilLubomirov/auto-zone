@@ -30,4 +30,5 @@ img{
 
 .btn.add-to-cart{
     margin-top: 10px;
+    max-width: 100%;
 }

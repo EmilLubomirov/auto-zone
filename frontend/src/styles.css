@@ -17,3 +17,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .error-snackbar{
     background: rgb(255, 0, 0);
 }
+
+.mat-card-content{
+    max-width: 100%;
+}
+
+.mat-form-field{
+    width: 100%;
+}

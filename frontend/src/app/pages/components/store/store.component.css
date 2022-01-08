@@ -47,3 +47,30 @@
     color: red;
     font-size: 20px;
 }
+
+@media only screen and (max-width: 800px) {
+    .products-wrapper{
+        grid-template-columns: repeat(3, 29%);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .products-wrapper{
+        grid-template-columns: repeat(2, 44%);
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .products-wrapper{
+        grid-template-columns: repeat(1, 88%);
+    }
+
+    .main-content{
+        flex-direction: column;
+    }
+
+    .filter-tag{
+        flex-grow: 0.4;
+        margin-bottom: 20px;
+    }
+}

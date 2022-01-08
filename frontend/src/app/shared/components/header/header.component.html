@@ -1,4 +1,4 @@
-<mat-toolbar class="header" color="primary">
+<mat-toolbar [ngClass]="('header main' + (isAdmin ? ' admin' : ''))" color="primary">
     <img class="logo" src="/assets/auto-zone-logo.png">
     <div class="links main-links">
         <div class="link-wrapper">
@@ -34,19 +34,19 @@
 
     <div class="user-options">
         <div *ngIf="!isLoggedIn">
-            <button mat-raised-button routerLink="/sign-in">
+            <button class="btn sign-in" mat-raised-button routerLink="/sign-in">
                 <mat-icon>lock_open</mat-icon>
                 Sign in
             </button>
 
-            <button mat-raised-button routerLink="/sign-up">
+            <button class="btn sign-up" mat-raised-button routerLink="/sign-up">
                 <mat-icon>exit_to_app</mat-icon>
                 Sign up
             </button>
         </div>
 
         <div *ngIf="isLoggedIn">
-            <button mat-raised-button (click)="handleLogout()">
+            <button class="btn logout" mat-raised-button (click)="handleLogout()">
                 <mat-icon>directions_run</mat-icon>
                 Logout
             </button>

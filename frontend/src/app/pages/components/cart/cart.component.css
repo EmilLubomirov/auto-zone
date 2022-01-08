@@ -1,13 +1,30 @@
 .page-wrapper{
     display: flex;
+    min-height: 65vh;
 }
 
 .price-section{
     display: flex;
     flex-flow: column;
     align-items: center;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.buttons {
+    margin-top: 15px;
 }
 
 .store-btn{
     margin-top: 5px;
+}
+
+@media only screen and (max-width: 800px) {
+    .page-wrapper{
+        flex-direction: column;
+    }
+
+    .price-section{
+        margin-top: 30px;
+    }
 }

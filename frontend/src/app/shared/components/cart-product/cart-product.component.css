@@ -8,10 +8,11 @@
 img{
     display: block;
     max-width: 150px;
-    margin-right: 50px;
+    margin-right: 20px;
 }
 
 .title{
+    display: block;
     font-size: larger;
     color: #000000;
     margin: 0 100px 0 70px;
@@ -35,4 +36,14 @@ img{
 
 .remove-icon :hover{
     cursor: pointer;
+}
+
+.mat-card-content{
+    text-align: center;
+}
+
+@media only screen and (max-width: 800px) {
+    .product-card{
+        flex-direction: column;
+    }
 }
