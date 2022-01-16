@@ -33,6 +33,7 @@ import { AboutComponent } from './pages/components/about/about.component';
 import { ContactsComponent } from './pages/components/contacts/contacts.component';
 import { MapComponent } from './shared/components/map/map.component';
 import { SafePipe } from './utils/safe.pipe';
+import { PageNotFoundComponent } from './pages/components/page-not-found/page-not-found.component';
 
 
 
@@ -56,7 +57,8 @@ import { SafePipe } from './utils/safe.pipe';
     AboutComponent,
     ContactsComponent,
     MapComponent,
-    SafePipe
+    SafePipe,
+    PageNotFoundComponent
   ],
   imports: [
     CommonModule,

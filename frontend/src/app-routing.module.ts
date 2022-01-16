@@ -14,6 +14,7 @@ import { OrderComponent } from './app/pages/components/order/order.component';
 import { ServicesComponent } from './app/pages/components/services/services.component';
 import { AboutComponent } from './app/pages/components/about/about.component';
 import { ContactsComponent } from './app/pages/components/contacts/contacts.component';
+import { PageNotFoundComponent } from './app/pages/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [{
   path: '', component: DefaultComponent,
@@ -27,7 +28,8 @@ const routes: Routes = [{
                 canActivate: [RoleGuard], data: {  isAdmin: true } },
             { path: 'cart/:userId', component: CartComponent, canActivate: [AuthGuard] },
             { path: 'order/:userId', component: OrderComponent, canActivate: [AuthGuard] },
-            { path: 'services', component: ServicesComponent, canActivate: [AuthGuard] }]
+            { path: 'services', component: ServicesComponent, canActivate: [AuthGuard] },
+            { path: '**', component: PageNotFoundComponent }]
 }];
 
 @NgModule({

@@ -28,6 +28,7 @@
 }
 
 .product-card{
+    padding: 20px;
     text-align: center;
     transition: transform .2s ease-in;
     margin-bottom: 30px;

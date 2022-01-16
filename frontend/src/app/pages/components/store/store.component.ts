@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../../models/product';
 import { ProductTag } from '../../models/product-tag';
@@ -9,8 +9,9 @@ import { ProductService } from '../../service/product.service';
     templateUrl: './store.component.html',
     styleUrls: ['./store.component.css']
 })
-export class StoreComponent implements OnInit {
+export class StoreComponent implements OnInit, AfterViewChecked {
     products!: Product[];
+    productsCount = 0;
     productTags!: ProductTag[];
     selectedProductTags!: string[];
     length!: number
@@ -19,13 +20,14 @@ export class StoreComponent implements OnInit {
     pagesCount!: number;
     paramsInvalid?: boolean;
     pageSizeOptions: number[] = [5, 10, 25, 100];
-    isLoading: boolean = true;
+    isLoading = true;
+    scrolled = false;
 
     constructor(private productService: ProductService, private route: ActivatedRoute,
         private router: Router) {
         this.products = [];
-        
-        if (sessionStorage.getItem("tags")){
+
+        if (sessionStorage.getItem("tags")) {
             this.selectedProductTags = JSON.parse(sessionStorage.getItem("tags") || '');
         }
         else {
@@ -54,6 +56,23 @@ export class StoreComponent implements OnInit {
         this.getProductTags();
     }
 
+    ngAfterViewChecked(): void {
+        let newProductsCount = this.products.length;
+
+        if (newProductsCount <= 0 || !this.productsCountChanged(newProductsCount) || this.scrolled){
+            return;
+        }
+
+        const scrollY = sessionStorage.getItem('scrollY');
+
+        if (scrollY) {
+            window.scrollTo(0, parseFloat(scrollY));
+        }
+
+        this.productsCount = newProductsCount;
+        this.scrolled = true;
+    }
+
     getProducts(): void {
         this.productService.getProductsPaged(this.pageIndex, this.pageSize, this.selectedProductTags).subscribe(response => {
             const {
@@ -74,11 +93,13 @@ export class StoreComponent implements OnInit {
     }
 
     handleProductClick(id: string): void {
+        sessionStorage.setItem('scrollY', window.scrollY.toString());
         this.router.navigate(['/product', id]);
         sessionStorage.setItem("tags", JSON.stringify(this.selectedProductTags));
     }
 
     onPageChange(event: any): void {
+        sessionStorage.removeItem('scrollY');
         const { pageIndex, pageSize } = event;
 
         if (pageSize !== this.pageSize) {
@@ -93,6 +114,8 @@ export class StoreComponent implements OnInit {
     }
 
     onTagChange(tagName: string, event: any): void {
+        sessionStorage.removeItem('scrollY');
+
         if (event.checked) {
             this.selectedProductTags.push(tagName);
         }
@@ -107,6 +130,10 @@ export class StoreComponent implements OnInit {
         else {
             this.getProducts();
         }
+    }
+
+    private productsCountChanged(newProductsCount: number): boolean {
+        return newProductsCount !== this.productsCount;
     }
 
     private validatePageParams(params: { [x: string]: any; }) {
