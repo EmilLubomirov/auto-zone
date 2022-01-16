@@ -25,6 +25,8 @@ export class HeaderComponent implements OnInit {
 
     handleLogout(): void {
         document.cookie = "x-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        sessionStorage.removeItem('scrollY');
+        sessionStorage.removeItem('tags');
         this.router.navigate(['sign-in']);
         this.updateUserState();
     }

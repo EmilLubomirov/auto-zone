@@ -23,7 +23,7 @@ export class UserService {
       rePassword
     }
 
-    return this.http.post<any>(this.signUpUrl, body, {observe: "response"})
+    return this.http.post<any>(this.signUpUrl, body, { observe: "response" })
       .pipe(
         catchError(this.handleError<any>('signUp', []))
       );

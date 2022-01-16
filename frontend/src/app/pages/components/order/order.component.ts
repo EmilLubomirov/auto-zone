@@ -56,12 +56,12 @@ export class OrderComponent implements OnInit {
         this.orderService.makeOrder(this.userId, products, firstName, surname, email, phone, address, 
             productsPrice, this.totalPrice, deliveryName).subscribe(response => {
                 if (response.status === 200){
-                    this.redirectToStore();
                     this.openSnackBar('Order is successful', 'success', 'Cancel');
+                    this.redirectToStore();
                 }
-                else{
-                    this.openSnackBar(response.error, 'error', 'Cancel');
-                }
+            }, error => {
+                const { message } = error.error.error;
+                this.openSnackBar(message, 'error', 'Cancel')
             });
 
     }
@@ -83,10 +83,19 @@ export class OrderComponent implements OnInit {
         });
     }
 
-    private openSnackBar(msg: string, type: string, action: string) {
+    private openSnackBar(msg: string, type:string, action: string) {
+        const styleClass = ['snackbar'];
+
+        if (type === 'error'){
+            styleClass.push('error-snackbar');
+        }
+        else if (type === 'success'){
+            styleClass.push('success-snackbar');
+        }
+
         this.snackbar.open(msg, action, {
             duration: this.snackbarDuration,
-            panelClass: [type === 'success' ? 'success-snackbar' : 'error-snackbar']
+            panelClass: styleClass
         });
     }
 

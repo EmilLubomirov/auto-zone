@@ -32,8 +32,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
         this.cartService.addToCart(productId, userId).subscribe(response => {
             if (response.status === 200){
-                this.openSnackBar('Product added to cart', 'Cancel')
+                this.openSnackBar('Product added to cart', 'success', 'Cancel')
             }
+        }, error => {
+            const { message } = error.error.error;
+            this.openSnackBar(message, 'error', 'Cancel')
         })
     }
 
@@ -44,9 +47,19 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         });
     }
 
-    private openSnackBar(msg: string, action: string) {
+    private openSnackBar(msg: string, type:string, action: string) {
+        const styleClass = ['snackbar'];
+
+        if (type === 'error'){
+            styleClass.push('error-snackbar');
+        }
+        else if (type === 'success'){
+            styleClass.push('success-snackbar');
+        }
+
         this.snackBar.open(msg, action, {
-            duration: this.snackbarDuration
+            duration: this.snackbarDuration,
+            panelClass: styleClass
         });
     }
 

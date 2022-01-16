@@ -18,7 +18,8 @@ import { PageNotFoundComponent } from './app/pages/components/page-not-found/pag
 
 const routes: Routes = [{
   path: '', component: DefaultComponent,
-  children: [{ path: 'store', component: StoreComponent }, 
+  children: [{ path: '', redirectTo: 'store', pathMatch: 'full' },
+             { path: 'store', component: StoreComponent }, 
              { path: 'sign-up', component: SignUpComponent, canActivate: [GuestGuard] },
              { path: 'sign-in', component: SignInComponent, canActivate: [GuestGuard] },
              { path: 'about', component: AboutComponent },

@@ -39,12 +39,13 @@ export class SignUpComponent implements OnInit {
         } = this.signUpForm.value;
 
         this.userService.signUp(username, password, rePassword).subscribe(response => {
-            if (response._id) {
+            console.log(response)
+            if (response.status === 201) {
                 this.redirectToLogin();
             }
         }, error => {
             const { message } = error.error.error;
-            this.openSnackBar(message, 'error', 'Cancel')
+            this.openSnackBar(message, 'error', 'Cancel');
         });
     }
 

@@ -28,6 +28,11 @@ export class SignInComponent implements OnInit {
     }
 
     handleSubmit(): void {
+        if (!this.signInForm.valid){
+            this.showFormErrors();
+            return;
+        }
+
         const {
             username,
             password
@@ -41,8 +46,11 @@ export class SignInComponent implements OnInit {
                 this.stateService.updateCurrentUserState('');
             }
             else if (response.status === 401) {
-                this.openSnackBar(response.error, 'error', 'Cancel')
+                this.openSnackBar(response.error, 'error', 'Cancel');
             }
+        },  error => {
+            const message = error.error;
+            this.openSnackBar(message, 'error', 'Cancel');
         });
     }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { ServiceTag } from '../../models/service-tag';
@@ -18,11 +20,14 @@ export class ServicesComponent implements OnInit {
     minDate = new Date();
     isAdmin!: boolean;
     isAddServiceContent = false;
+    snackbarDuration: number = 3000;
 
     constructor(private fb: FormBuilder,
+        private router: Router,
         private serviceService: ServiceService,
         private authService: AuthService,
-        public dialog: MatDialog) { }
+        public dialog: MatDialog,
+        private snackBar: MatSnackBar) { }
 
     ngOnInit(): void {
         this.serviceAppointmentForm = this.fb.group({
@@ -103,8 +108,14 @@ export class ServicesComponent implements OnInit {
 
         this.serviceService.makeAppointment(userId, firstName, surname, phone, 
             carLicensePlate, date, tag.name).subscribe(response => {
-            console.log(response);    
-        })
+            if (response.status === 200){
+                this.openSnackBar('Appointment is successful', 'success', 'Cancel');
+                this.redirectToStore();
+            }
+        }, error => {
+            const { message } = error.error;
+            this.openSnackBar(message, 'error', 'Cancel');
+        });
     }
 
     get firstName() { return this.serviceAppointmentForm.get('firstName'); }
@@ -124,8 +135,31 @@ export class ServicesComponent implements OnInit {
     get serviceName() { return this.addServiceForm.get('serviceName'); }
 
     private saveService(serviceName: string): void{
-        this.serviceService.addService(this.authService.getUserId(), serviceName)
-        .subscribe();
+        this.serviceService.addService(this.authService.getUserId(), serviceName).subscribe(response => {
+            if (response.status === 200){
+                this.openSnackBar('Service is added successfully', 'success', 'Cancel');
+                this.redirectToStore();
+            }
+        }, error => {
+            const message = error.error;
+            this.openSnackBar(message, 'error', 'Cancel');
+        });
+    }
+
+    private openSnackBar(msg: string, type:string, action: string) {
+        const styleClass = ['snackbar'];
+
+        if (type === 'error'){
+            styleClass.push('error-snackbar');
+        }
+        else if (type === 'success'){
+            styleClass.push('success-snackbar');
+        }
+
+        this.snackBar.open(msg, action, {
+            duration: this.snackbarDuration,
+            panelClass: styleClass
+        });
     }
 
     private showFormErrors(form: any): void {
@@ -133,6 +167,10 @@ export class ServicesComponent implements OnInit {
             const control = form.get(field);
             control.markAsTouched({ onlySelf: true });
         });
+    }
+
+    private redirectToStore() {
+        this.router.navigate(['/store']);
     }
 
 }

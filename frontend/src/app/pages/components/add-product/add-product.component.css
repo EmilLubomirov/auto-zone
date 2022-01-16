@@ -13,6 +13,10 @@
     color: red;
 }
 
+.quantity{
+    margin-top: 20px;
+}
+
 .image-uploader{
     margin-top: 5px;
 }

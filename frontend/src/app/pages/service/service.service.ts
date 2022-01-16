@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ServiceTag } from '../models/service-tag';
 
@@ -39,7 +39,7 @@ export class ServiceService {
             );
     }
 
-    addService(userId: string, serviceName: string): Observable<ServiceTag> {
+    addService(userId: string, serviceName: string): Observable<any> {
         const body = {
             userId,
             serviceName
@@ -54,7 +54,7 @@ export class ServiceService {
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             console.error(error);
-            return of(result as T);
+            return throwError(error);
         };
     }
 }

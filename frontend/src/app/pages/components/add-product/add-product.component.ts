@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ProductTag } from '../../models/product-tag';
@@ -13,10 +14,12 @@ import { ProductService } from '../../service/product.service';
 export class AddProductComponent implements OnInit {
     addProductForm: any;
     productTags!: ProductTag[];
+    snackbarDuration: number = 3000;
 
     constructor(private fb: FormBuilder, private productService: ProductService, 
         private authService: AuthService,
-        private router: Router) { }
+        private router: Router,
+        private snackbar: MatSnackBar) { }
 
     ngOnInit(): void {
         this.addProductForm = this.fb.group({
@@ -61,6 +64,7 @@ export class AddProductComponent implements OnInit {
             this.productService.createProduct(title, description, quantity,
                 price, imageUrl, tag.name, resp.id).subscribe(response => {
                     if (response.status === 200){
+                        this.openSnackBar('Product added successfully', 'success', 'Cancel');
                         this.router.navigate([`product/${response.body._id}`]);
                     }
                 });
@@ -83,6 +87,22 @@ export class AddProductComponent implements OnInit {
         Object.keys(this.addProductForm.controls).forEach(field => {
             const control = this.addProductForm.get(field);
             control.markAsTouched({ onlySelf: true });
+        });
+    }
+
+    private openSnackBar(msg: string, type:string, action: string) {
+        const styleClass = ['snackbar'];
+
+        if (type === 'error'){
+            styleClass.push('error-snackbar');
+        }
+        else if (type === 'success'){
+            styleClass.push('success-snackbar');
+        }
+
+        this.snackbar.open(msg, action, {
+            duration: this.snackbarDuration,
+            panelClass: styleClass
         });
     }
 }
