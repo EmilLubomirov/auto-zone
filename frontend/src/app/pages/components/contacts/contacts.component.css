@@ -9,8 +9,17 @@
 
 .info{
     font-weight: 500;
-    font-size: 17px;
     margin-left: 70px;
+    height: 250px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+.contact-methods{
+    font-size: 17px;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -19,6 +28,7 @@
     }
 
     .info{
-        margin: 0 auto;
+        margin-left: 0;
+        height: fit-content;
     }
 }

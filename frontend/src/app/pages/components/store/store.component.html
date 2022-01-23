@@ -22,9 +22,9 @@
         <div class="products-wrapper">
             <div *ngFor="let product of products">
                 <mat-card (click)="handleProductClick(product._id)" class="product-card">
-                    <img mat-card-image src="{{product.imageUrl}}" alt="Photo of a Product">
-                    <mat-card-content>
-                        <p class="title">
+                    <img class="product-image" mat-card-image src="{{product.imageUrl}}" alt="Photo of a Product">
+                    <mat-card-content class="title">
+                        <p>
                             {{product.title}}
                         </p>
                     </mat-card-content>

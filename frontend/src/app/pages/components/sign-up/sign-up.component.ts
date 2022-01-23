@@ -39,7 +39,6 @@ export class SignUpComponent implements OnInit {
         } = this.signUpForm.value;
 
         this.userService.signUp(username, password, rePassword).subscribe(response => {
-            console.log(response)
             if (response.status === 201) {
                 this.redirectToLogin();
             }

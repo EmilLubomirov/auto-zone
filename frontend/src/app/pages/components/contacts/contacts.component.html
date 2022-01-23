@@ -7,20 +7,24 @@
             <div class="map">
                 <app-map [url]="mapUrl"></app-map>
             </div>
-            <div class="info">
-                <p>
-                    Phone: +359 876 312 313
-                </p>
-                <p>
-                    Facebook: Auto-Zone
-                </p>
-                <p>
-                    Working schedule: Monday - Friday
-                </p>
-                <p>
-                    9:00 - 19:00
-                </p>
-            </div>
+            <mat-card class="info">
+                <mat-card-content>
+                    <div class="contact-methods">
+                        <p>
+                            Phone: +359 876 312 313
+                        </p>
+                        <p>
+                            Facebook: Auto-Zone
+                        </p>
+                        <p>
+                            Working schedule: Monday - Friday
+                        </p>
+                        <p>
+                            9:00 - 19:00
+                        </p>
+                    </div>
+                </mat-card-content>
+            </mat-card>
         </mat-card-content>
     </mat-card>
 </div>
