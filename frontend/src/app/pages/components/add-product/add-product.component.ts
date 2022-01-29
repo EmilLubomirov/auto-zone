@@ -16,7 +16,7 @@ export class AddProductComponent implements OnInit {
     productTags!: ProductTag[];
     snackbarDuration: number = 3000;
 
-    constructor(private fb: FormBuilder, private productService: ProductService, 
+    constructor(private fb: FormBuilder, private productService: ProductService,
         private authService: AuthService,
         private router: Router,
         private snackbar: MatSnackBar) { }
@@ -60,14 +60,16 @@ export class AddProductComponent implements OnInit {
             tag
         } = this.addProductForm.value;
 
-        this.authService.getLoggedInUser().subscribe(resp => {
-            this.productService.createProduct(title, description, quantity,
-                price, imageUrl, tag.name, resp.id).subscribe(response => {
-                    if (response.status === 200){
-                        this.openSnackBar('Product added successfully', 'success', 'Cancel');
-                        this.router.navigate([`product/${response.body._id}`]);
-                    }
-                });
+        this.authService.getLoggedInUser().subscribe(user => {
+            if (user) {
+                this.productService.createProduct(title, description, quantity,
+                    price, imageUrl, tag.name, user.id).subscribe(response => {
+                        if (response.status === 200) {
+                            this.openSnackBar('Product added successfully', 'success', 'Cancel');
+                            this.router.navigate([`product/${response.body._id}`]);
+                        }
+                    });
+            }
         });
     }
 
@@ -90,13 +92,13 @@ export class AddProductComponent implements OnInit {
         });
     }
 
-    private openSnackBar(msg: string, type:string, action: string) {
+    private openSnackBar(msg: string, type: string, action: string) {
         const styleClass = ['snackbar'];
 
-        if (type === 'error'){
+        if (type === 'error') {
             styleClass.push('error-snackbar');
         }
-        else if (type === 'success'){
+        else if (type === 'success') {
             styleClass.push('success-snackbar');
         }
 

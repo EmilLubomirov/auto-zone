@@ -10,12 +10,15 @@
             <p class="title">
                 {{product.description}}
             </p>
+            <div *ngIf="product.quantity < 4 && product.quantity > 0">
+                <h4 class="last-items">Last {{product.quantity}} items</h4>
+            </div>
         </mat-card-content>
         <mat-card-footer>
             <div class="footer">
                 <span class="price">{{product.price + ' BGN.'}}</span>
 
-                <div class="btn add-to-cart">
+                <div *ngIf="product.quantity > 0" class="btn add-to-cart">
                     <button mat-raised-button color="primary" (click)="handleAddToCartClick(product._id)">
                         <mat-icon>add_shopping_cart</mat-icon>
                         ADD TO CART
@@ -23,5 +26,8 @@
                 </div>
             </div>
         </mat-card-footer>
+        <div *ngIf="product.quantity === 0" class="overlay">
+            <h4 class="stock-title">OUT OF STOCK</h4>
+        </div>
     </mat-card>
 </div>

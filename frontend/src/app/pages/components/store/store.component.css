@@ -34,6 +34,17 @@
     margin-bottom: 30px;
 }
 
+.product-card.out-of-stock{
+    transition: none;
+}
+
+.product-card.out-of-stock:hover{
+    transform: none;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+                0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+                0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
 .product-card:hover{
     cursor: pointer;
     transform: scale(1.03);
@@ -45,6 +56,15 @@
     max-height: 300px;
     object-fit: cover;
     max-width: 100%;
+}
+
+.overlay > .stock-title{
+    margin: 35% auto 0 auto;
+    color: #000000;
+}
+
+.product-title{
+    margin-bottom: 5px;
 }
 
 .title, .price{
@@ -59,6 +79,12 @@
 .price{
     color: red;
     font-size: 20px;
+}
+
+.last-items{
+    color: red;
+    font-size: 13px;
+    margin: 0;
 }
 
 @media only screen and (max-width: 1000px) {

@@ -21,16 +21,22 @@
 
         <div class="products-wrapper">
             <div *ngFor="let product of products">
-                <mat-card (click)="handleProductClick(product._id)" class="product-card">
+                <mat-card (click)="handleProductClick(product._id)" [ngClass]="'product-card' + (product.quantity === 0 ? ' out-of-stock' : '')">
                     <img class="product-image" mat-card-image src="{{product.imageUrl}}" alt="Photo of a Product">
                     <mat-card-content class="title">
-                        <p>
+                        <p class="product-title">
                             {{product.title}}
                         </p>
+                        <div *ngIf="product.quantity < 4 && product.quantity > 0">
+                            <h4 class="last-items">Last {{product.quantity}} items</h4>
+                        </div>
                     </mat-card-content>
                     <mat-card-footer>
                         <span class="price">{{product.price + ' BGN.'}}</span>
                     </mat-card-footer>
+                    <div *ngIf="product.quantity === 0" class="overlay">
+                        <h4 class="stock-title">OUT OF STOCK</h4>
+                    </div>
                 </mat-card>
             </div>
         </div>

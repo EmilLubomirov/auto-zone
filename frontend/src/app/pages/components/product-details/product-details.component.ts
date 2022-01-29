@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Product } from '../../models/product';
 import { CartService } from '../../service/cart.service';
@@ -18,7 +18,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     snackbarDuration: number = 3000;
 
     constructor(private route: ActivatedRoute, private productService: ProductService,
-        private authService: AuthService, private cartService: CartService,  private snackBar: MatSnackBar) { }
+        private authService: AuthService, private cartService: CartService,  private snackBar: MatSnackBar,
+        private router: Router) { }
 
     ngOnInit(): void {
         this.sub = this.route.params.subscribe(params => {
@@ -28,15 +29,20 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     }
 
     handleAddToCartClick(productId: string) {
-        const userId = this.authService.getUserId();
-
-        this.cartService.addToCart(productId, userId).subscribe(response => {
-            if (response.status === 200){
-                this.openSnackBar('Product added to cart', 'success', 'Cancel')
+        this.authService.getLoggedInUser().subscribe(user => {
+            if (!user || !user.id){
+                this.router.navigate(['sign-in']);
             }
-        }, error => {
-            const { message } = error.error.error;
-            this.openSnackBar(message, 'error', 'Cancel')
+            else{
+                this.cartService.addToCart(productId, user.id).subscribe(response => {
+                    if (response.status === 200){
+                        this.openSnackBar('Product added to cart', 'success', 'Cancel')
+                    }
+                }, error => {
+                    const { message } = error.error.error;
+                    this.openSnackBar(message, 'error', 'Cancel')
+                })
+            }
         })
     }
 

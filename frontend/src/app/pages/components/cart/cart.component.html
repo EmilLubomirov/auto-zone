@@ -8,8 +8,28 @@
         </div>
 
     </div>
-
-    <div class="price-section">
+    <mat-card class="price-section">
+        <mat-card-content class="content">
+            <div>
+                <strong>Products price: {{productsPrice}}</strong>
+            </div>
+            <div>
+                <strong>
+                    Total price: {{totalPrice}}
+                    <small>&#160;(*delivery included)</small>
+                </strong>
+            </div>
+            <div class="buttons">
+                <div *ngIf="cart && cart.products" class="order-btn">
+                    <button mat-raised-button color="primary" (click)="handleOrderBtnClick()">Make order</button>
+                </div>
+                <div class="store-btn">
+                    <button mat-raised-button color="primary" routerLink="/store">Continue shopping</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <!-- <div class="price-section">
         <div>
             <strong>Products price: {{productsPrice}}</strong>
         </div>
@@ -27,5 +47,5 @@
                 <button mat-raised-button color="primary" routerLink="/store">Continue shopping</button>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>

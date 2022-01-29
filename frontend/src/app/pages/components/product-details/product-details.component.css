@@ -16,6 +16,19 @@ img{
     width: 40%;
 }
 
+.overlay > .stock-title{
+    margin: 20% auto 0 auto;
+    width: fit-content;
+    color: #000000;
+}
+
+.last-items{
+    color: red;
+    font-size: 16px;
+    margin: 0 auto;
+    width: fit-content;
+}
+
 .footer{
     display: flex;
     flex-flow: column;

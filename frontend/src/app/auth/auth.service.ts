@@ -47,12 +47,11 @@ export class AuthService {
         return decode<MyToken>(token).id;
     }
 
-    getLoggedInUser(): Observable<User> {
-
+    getLoggedInUser(): Observable<User | undefined> {
         const authToken = getCookie(authCookieName) || "";
-
+        
         if (!authToken) {
-            return of();
+            return of(undefined);
         }
 
         const headers = { 'Content-Type': 'application/json', "authorization": authToken };

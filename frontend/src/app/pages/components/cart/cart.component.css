@@ -3,12 +3,21 @@
     min-height: 65vh;
 }
 
+.products-wrapper{
+    margin-right: 15px;
+}
+
 .price-section{
     display: flex;
     flex-flow: column;
     align-items: center;
     margin: 0 auto;
     text-align: center;
+    height: 250px;
+}
+
+.price-section .content{
+    font-size: 15px;
 }
 
 .buttons {
@@ -24,7 +33,12 @@
         flex-direction: column;
     }
 
+    .products-wrapper{
+        margin-right: 0;
+    }    
+
     .price-section{
-        margin-top: 30px;
+        margin: 30px auto 0 auto;
+        width: fit-content;
     }
 }
