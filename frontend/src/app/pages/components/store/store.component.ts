@@ -129,6 +129,7 @@ export class StoreComponent implements OnInit, AfterViewChecked {
         }
         else {
             this.getProducts();
+            this.isLoading = true;
         }
     }
 

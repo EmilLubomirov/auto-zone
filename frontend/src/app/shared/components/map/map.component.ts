@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
     selector: 'app-map',
@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MapComponent implements OnInit {
     @Input() url!: string;
+    @Output() handleMapLoad: EventEmitter<any> = new EventEmitter();
 
     constructor() {  }
 

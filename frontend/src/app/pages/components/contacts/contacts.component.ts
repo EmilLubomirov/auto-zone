@@ -13,10 +13,16 @@ export class ContactsComponent implements OnInit {
         "vQs9Cw0YDQuNGP4oCcIDM3LCAxNDA4INC2LtC6LiDQodGC0YDQtdC70LHQuNGJ0LUsINCh0L7RhNC40Y8!" +
         "5e0!3m2!1sbg!2sbg!4v1604503335025!5m2!1sbg!2sbg"
     );
+    isMapLoading = true;
 
     constructor() { }
 
     ngOnInit(): void {
+    }
+
+    handleMapLoad(){
+        console.log('ops')
+        this.isMapLoading = false;
     }
 
 }

@@ -12,7 +12,7 @@ import { CartService } from '../../service/cart.service';
 export class CartComponent implements OnInit {
     cart!: Cart;
     userId!: string;
-    isLoading: boolean = true;
+    isLoading = true;
     maxProductQuantity = 10;
     productsPrice!: string;
     totalPrice!: string;
@@ -30,7 +30,6 @@ export class CartComponent implements OnInit {
         this.userId = this.authService.getUserId();
         this.cartService.getCart(this.userId).subscribe(response => {
             this.cart = response;
-            this.isLoading = false;
             this.updateProductsPrice();
         });
     }
@@ -77,6 +76,7 @@ export class CartComponent implements OnInit {
                 this.cartService.getDeliveryByName("Standard").subscribe(response => {
                     this.deliveryName = response.name;
                     this.totalPrice = (currentProductsPrice + response.price).toFixed(2);
+                    this.isLoading = false;
                 });
             }
 
@@ -84,11 +84,13 @@ export class CartComponent implements OnInit {
                 this.cartService.getDeliveryByName("Free").subscribe(response => {
                     this.deliveryName = response.name;
                     this.totalPrice = (currentProductsPrice + response.price).toFixed(2);
+                    this.isLoading = false;
                 });
             }
         }
         else {
             this.totalPrice = '0.00';
+            this.isLoading = false;
         }
     }
 

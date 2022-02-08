@@ -1,6 +1,10 @@
 <div class="page-wrapper">
 
-    <div *ngIf="cart" class="products-wrapper">
+    <div class="loader" *ngIf="isLoading">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <div *ngIf="cart && !isLoading" class="products-wrapper">
         <div *ngFor="let cartProduct of cart.products">
             <app-cart-product [cartProduct]="cartProduct" [userId]="userId"
                 (productQtyChangeEvent)="handleProductQtyChange($event)"
@@ -8,7 +12,7 @@
         </div>
 
     </div>
-    <mat-card class="price-section">
+    <mat-card class="price-section" *ngIf="!isLoading">
         <mat-card-content class="content">
             <div>
                 <strong>Products price: {{productsPrice}}</strong>

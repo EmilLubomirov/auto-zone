@@ -5,7 +5,7 @@
         </mat-card-header>
         <mat-card-content class="content">
             <div class="map">
-                <app-map [url]="mapUrl"></app-map>
+                <app-map [url]="mapUrl" (handleMapLoad)="handleMapLoad()"></app-map>
             </div>
             <mat-card class="info">
                 <mat-card-content>

@@ -11,12 +11,16 @@
                 {{product.description}}
             </p>
             <div *ngIf="product.quantity < 4 && product.quantity > 0">
-                <h4 class="last-items">Last {{product.quantity}} items</h4>
+                <h4 class="last-items" *ngIf="product.quantity > 1; else elseBlock">Last
+                    {{product.quantity}} items</h4>
+                <ng-template #elseBlock>
+                    <h4 class="last-items">Last item</h4>
+                </ng-template>
             </div>
         </mat-card-content>
         <mat-card-footer>
             <div class="footer">
-                <span class="price">{{product.price + ' BGN.'}}</span>
+                <span class="price">{{product.price.toFixed(2) + ' BGN.'}}</span>
 
                 <div *ngIf="product.quantity > 0" class="btn add-to-cart">
                     <button mat-raised-button color="primary" (click)="handleAddToCartClick(product._id)">
