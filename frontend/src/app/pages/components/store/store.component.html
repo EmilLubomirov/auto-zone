@@ -25,7 +25,7 @@
                         <h4>Price</h4>
                     </mat-card-header>
                     <mat-card-content class="tags">
-                        <app-price-filter [minValue]="minPrice" [maxValue]="maxPrice" (handleRangeChange)="onPriceRangeChange($event)"></app-price-filter>
+                        <app-price-filter [minValue]="minSliderPrice" [maxValue]="maxSliderPrice" [step]="sliderStep" (handleRangeChange)="onPriceRangeChange($event)"></app-price-filter>
                     </mat-card-content>
                 </mat-card>
             </div>

@@ -1,0 +1,8 @@
+.filter-wrapper .ngx-slider .ngx-slider-pointer, 
+.filter-wrapper .ngx-slider .ngx-slider-bar.ngx-slider-selection{
+    background-color: #3f51b5;
+}
+
+.filter-wrapper .ngx-slider .ngx-slider-pointer.ngx-slider-active::after{
+    background-color: #ffffff;
+}

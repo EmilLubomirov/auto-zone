@@ -1,37 +1,53 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ChangeContext, Options } from "@angular-slider/ngx-slider";
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ChangeContext, LabelType, Options } from "@angular-slider/ngx-slider";
 
 @Component({
     selector: 'app-price-filter',
     templateUrl: './price-filter.component.html',
-    styleUrls: ['./price-filter.component.css']
+    styleUrls: ['./price-filter.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class PriceFilterComponent implements OnInit, OnChanges {
     @Input() minValue!: number;
     @Input() maxValue!: number;
+    @Input() step!: number;
 
+    minSliderPrice!: number;
+    maxSliderPrice!: number;
     isLoading: boolean = true;
-
-    options: Options = {
-        floor: 0,
-        ceil: 300,
-        step: 50,
-    };
-
+    options!: Options;
 
     @Output() handleRangeChange: EventEmitter<ChangeContext> = new EventEmitter();
 
     constructor() { }
 
     ngOnChanges(changes: SimpleChanges): void {
-        this.isLoading = false;
+        if (this.isLoading) {
+            this.minSliderPrice = this.minValue;
+            this.maxSliderPrice = this.maxValue;
+
+            this.options = {
+                floor: this.minValue,
+                ceil: this.maxValue,
+                step: this.step,
+                translate: (value: number, label: LabelType): string => {
+                    if (value === this.maxSliderPrice) {
+                        return (value - this.step) + '+';
+                    }
+
+                    return value + '';
+                }
+            };
+
+            this.isLoading = false;
+        }
     }
 
     ngOnInit(): void {
-        
+
     }
 
-    handleChange(changeContext: ChangeContext){
+    handleChange(changeContext: ChangeContext) {
         this.handleRangeChange.emit(changeContext);
     }
 

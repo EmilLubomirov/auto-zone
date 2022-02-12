@@ -1,1 +1,3 @@
-<ngx-slider *ngIf="!isLoading" [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChangeEnd)="handleChange($event)"></ngx-slider>
+<div class="filter-wrapper">
+    <ngx-slider *ngIf="!isLoading" [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChangeEnd)="handleChange($event)"></ngx-slider>
+</div>

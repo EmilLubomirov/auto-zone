@@ -11,12 +11,16 @@ import { ProductService } from '../../service/product.service';
     styleUrls: ['./store.component.css']
 })
 export class StoreComponent implements OnInit, AfterViewChecked {
+    minSliderPrice = 0;
+    maxSliderPrice = 350;
+    sliderStep = 50;
+
     products!: Product[];
     productsCount = 0;
     productTags!: ProductTag[];
     selectedProductTags!: string[];
-    minPrice = 0;
-    maxPrice = 300;
+    minPrice = this.minSliderPrice;
+    maxPrice = this.maxSliderPrice;
     length!: number
     pageSize!: number
     pageIndex!: number
@@ -41,14 +45,14 @@ export class StoreComponent implements OnInit, AfterViewChecked {
             this.minPrice = JSON.parse(sessionStorage.getItem("minPrice") || '');
         }
         else {
-            this.minPrice = 0;
+            this.minPrice = this.minSliderPrice;
         }
 
         if (sessionStorage.getItem("maxPrice")) {
             this.maxPrice = JSON.parse(sessionStorage.getItem("maxPrice") || '');
         }
         else {
-            this.maxPrice = 300;
+            this.maxPrice = this.maxSliderPrice;
         }
 
         this.pageSize = 10;
@@ -91,7 +95,9 @@ export class StoreComponent implements OnInit, AfterViewChecked {
     }
 
     getProducts(): void {
-        this.productService.getProductsPaged(this.pageIndex, this.pageSize, this.selectedProductTags, this.minPrice, this.maxPrice).subscribe(response => {
+        const maxPriceFilter = this.maxPrice === this.maxSliderPrice ? Number.MAX_SAFE_INTEGER : this.maxPrice;
+        
+        this.productService.getProductsPaged(this.pageIndex, this.pageSize, this.selectedProductTags, this.minPrice, maxPriceFilter).subscribe(response => {
             const {
                 products,
                 count
