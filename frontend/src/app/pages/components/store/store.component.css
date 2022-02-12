@@ -6,12 +6,16 @@
     display: flex;
 }
 
-.filter-tag{
+.filters{
     flex-grow: 1;
 }
 
-.filter-tag .header{
+.filters .header{
     display: block;
+}
+
+.filter-price{
+    margin-top: 5px;
 }
 
 .loader{
@@ -147,7 +151,7 @@
         flex-direction: column;
     }
 
-    .filter-tag{
+    .filters{
         flex-grow: 0.4;
         margin-bottom: 20px;
     }

@@ -23,6 +23,7 @@ import { AddProductComponent } from './pages/components/add-product/add-product.
 import { ImageUploaderComponent } from './shared/components/image-uploader/image-uploader.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { NgxCloudinaryWidgetModule } from 'ngx-cloudinary-upload-widget';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { environment } from '../environments/environment';
 import { CartComponent } from './pages/components/cart/cart.component';
 import { CartProductComponent } from './shared/components/cart-product/cart-product.component';
@@ -36,6 +37,7 @@ import { SafePipe } from './utils/safe.pipe';
 import { PageNotFoundComponent } from './pages/components/page-not-found/page-not-found.component';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
+import { PriceFilterComponent } from './shared/components/price-filter/price-filter.component';
 
 
 @NgModule({
@@ -59,7 +61,8 @@ import { GoogleLoginProvider } from 'angularx-social-login';
     ContactsComponent,
     MapComponent,
     SafePipe,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PriceFilterComponent
   ],
   imports: [
     CommonModule,
@@ -73,6 +76,7 @@ import { GoogleLoginProvider } from 'angularx-social-login';
     RouterModule,
     SocialLoginModule,
     FileUploadModule,
+    NgxSliderModule,
 
     NgxCloudinaryWidgetModule.forRoot(
         {

@@ -18,9 +18,9 @@ export class ProductService {
 
     constructor(private http: HttpClient) { }
 
-    getProductsPaged(page: number, size: number, selectedTags: string[]): Observable<any> {
+    getProductsPaged(page: number, size: number, selectedTags: string[], minPrice: number, maxPrice: number): Observable<any> {
         const options = {
-            params: new HttpParams({ fromString: `page=${page}&size=${size}&selectedTags=${selectedTags.join(',')}` })
+            params: new HttpParams({ fromString: `page=${page}&size=${size}&selectedTags=${selectedTags.join(',')}&minPrice=${minPrice}&maxPrice=${maxPrice}` })
         }
 
         return this.http.get<any>(this.productsUrl, options)

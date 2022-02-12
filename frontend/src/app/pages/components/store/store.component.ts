@@ -1,3 +1,4 @@
+import { ChangeContext } from '@angular-slider/ngx-slider';
 import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../../models/product';
@@ -14,6 +15,8 @@ export class StoreComponent implements OnInit, AfterViewChecked {
     productsCount = 0;
     productTags!: ProductTag[];
     selectedProductTags!: string[];
+    minPrice = 0;
+    maxPrice = 300;
     length!: number
     pageSize!: number
     pageIndex!: number
@@ -32,6 +35,20 @@ export class StoreComponent implements OnInit, AfterViewChecked {
         }
         else {
             this.selectedProductTags = [];
+        }
+
+        if (sessionStorage.getItem("minPrice")) {
+            this.minPrice = JSON.parse(sessionStorage.getItem("minPrice") || '');
+        }
+        else {
+            this.minPrice = 0;
+        }
+
+        if (sessionStorage.getItem("maxPrice")) {
+            this.maxPrice = JSON.parse(sessionStorage.getItem("maxPrice") || '');
+        }
+        else {
+            this.maxPrice = 300;
         }
 
         this.pageSize = 10;
@@ -74,7 +91,7 @@ export class StoreComponent implements OnInit, AfterViewChecked {
     }
 
     getProducts(): void {
-        this.productService.getProductsPaged(this.pageIndex, this.pageSize, this.selectedProductTags).subscribe(response => {
+        this.productService.getProductsPaged(this.pageIndex, this.pageSize, this.selectedProductTags, this.minPrice, this.maxPrice).subscribe(response => {
             const {
                 products,
                 count
@@ -96,6 +113,8 @@ export class StoreComponent implements OnInit, AfterViewChecked {
         sessionStorage.setItem('scrollY', window.scrollY.toString());
         this.router.navigate(['/product', id]);
         sessionStorage.setItem("tags", JSON.stringify(this.selectedProductTags));
+        sessionStorage.setItem("minPrice", JSON.stringify(this.minPrice));
+        sessionStorage.setItem("maxPrice", JSON.stringify(this.maxPrice));
     }
 
     onPageChange(event: any): void {
@@ -130,6 +149,24 @@ export class StoreComponent implements OnInit, AfterViewChecked {
         else {
             this.getProducts();
             this.isLoading = true;
+        }
+    }
+
+    onPriceRangeChange(changeContext: ChangeContext){
+        const { value, highValue } = changeContext;
+
+        if (value !== this.minPrice || highValue !== this.maxPrice){
+            this.minPrice = value;
+            this.maxPrice = highValue!;
+
+            if (this.pageIndex !== 1) {
+                this.pageIndex = 1;
+                this.changeRoute();
+            }
+            else {
+                this.getProducts();
+                this.isLoading = true;
+            }
         }
     }
 

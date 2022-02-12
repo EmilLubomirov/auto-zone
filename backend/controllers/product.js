@@ -10,7 +10,12 @@ module.exports = {
                 selectedTags,
                 page,
                 size,
+                minPrice,
+                maxPrice
             } = req.query;
+
+            const minPriceNum = minPrice ? parseInt(minPrice) : undefined;
+            const maxPriceNum = maxPrice ? parseInt(maxPrice) : undefined;
 
             try {
 
@@ -18,7 +23,6 @@ module.exports = {
                 let count = 0;
 
                 if (selectedTags && selectedTags.length > 0) {
-
                     const tags = (await Promise.all(selectedTags.split(',').map(async (tagName) => {
                         return await models.ProductTag.findOne({
                             name: tagName
@@ -31,30 +35,42 @@ module.exports = {
                         const skip = (parseInt(page) - 1) * parseInt(size);
                         const limit = parseInt(size);
 
+                        let match = { 'tag': {$in: tags}};
+
+                        if (minPriceNum !== undefined && maxPriceNum !== undefined){
+                            match = { 'tag': {$in: tags},
+                                      'price': {$gte :  minPriceNum, $lte : maxPriceNum}}
+                        }
+
                         products = await models.Product.aggregate([
-                            {$match: { 'tag': {$in: tags}}},
+                            {$match: match},
+                            {$sort: {'price': 1}},
                             {$skip: skip},
                             {$limit: limit},
                         ]);
 
-                        count = await models.Product.countDocuments({'tag': {$in: tags}});
+                        count = await models.Product.countDocuments(match);
                     }
-
-                    products = products.sort((p1, p2) => {
-                        return p1.tag - p2.tag
-                    });
-
                 }
 
                 else if (page || size) {
-
-                    count = await mongoose.connection.db.collection('products').countDocuments();
-
                     const skip = (parseInt(page) - 1) * parseInt(size);
                     const limit = parseInt(size);
 
+                    let match = {};
+
+                    if (minPriceNum !== undefined && maxPriceNum !== undefined){
+                       match = {'price': {$gte :  minPriceNum, $lte : maxPriceNum}}
+                       count = await models.Product.countDocuments(match);
+                    }
+
+                    else {
+                        count = await mongoose.connection.db.collection('products').countDocuments();
+                    }
+
                     products = await models.Product.aggregate([
-                        {$match: {}},
+                        {$match: match},
+                        {$sort: {'price': 1}},
                         {$skip: skip},
                         {$limit: limit},
                     ]);
