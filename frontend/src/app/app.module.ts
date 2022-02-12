@@ -34,7 +34,8 @@ import { ContactsComponent } from './pages/components/contacts/contacts.componen
 import { MapComponent } from './shared/components/map/map.component';
 import { SafePipe } from './utils/safe.pipe';
 import { PageNotFoundComponent } from './pages/components/page-not-found/page-not-found.component';
-
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { PageNotFoundComponent } from './pages/components/page-not-found/page-no
     ReactiveFormsModule,
     MaterialModule,
     RouterModule,
+    SocialLoginModule,
     FileUploadModule,
 
     NgxCloudinaryWidgetModule.forRoot(
@@ -81,7 +83,21 @@ import { PageNotFoundComponent } from './pages/components/page-not-found/page-no
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    JwtHelperService
+    JwtHelperService,
+    {
+        provide: 'SocialAuthServiceConfig',
+        useValue: {
+          autoLogin: false,
+          providers: [
+            {
+              id: GoogleLoginProvider.PROVIDER_ID,
+              provider: new GoogleLoginProvider(
+                environment.ANGULAR_APP_GOOGLE_APP_ID
+              )
+            }
+          ]
+        } as SocialAuthServiceConfig,
+      }    
   ],
   bootstrap: [AppComponent]
 })

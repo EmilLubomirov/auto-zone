@@ -21,6 +21,22 @@
     margin-top: 20px;
 }
 
-.btn-sign-up{
+.footer{
     margin-top: 10px;
+}
+
+.btn-sign-in{
+    margin-top: 10px;
+}
+
+.google-sign-in{
+    display: block;
+}
+
+.google-icon{
+    margin-right: 5px;
+    background: #ffffff;
+    border-radius: 50%;
+    height: 23px;
+    width: 23px;
 }

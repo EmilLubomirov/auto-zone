@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { StateService } from 'src/app/pages/service/state.service';
+import { SocialAuthService } from 'angularx-social-login';
 
 @Component({
     selector: 'app-header',
@@ -14,7 +15,8 @@ export class HeaderComponent implements OnInit {
     isAdmin!: boolean;
 
     constructor(private authService: AuthService, private stateService: StateService,
-                private router: Router) { }
+                private router: Router,
+                private socialAuthService: SocialAuthService) { }
 
     ngOnInit(): void {
         this.stateService.currentUserState$
@@ -24,11 +26,13 @@ export class HeaderComponent implements OnInit {
     }
 
     handleLogout(): void {
-        document.cookie = "x-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        sessionStorage.removeItem('scrollY');
-        sessionStorage.removeItem('tags');
-        this.router.navigate(['sign-in']);
-        this.updateUserState();
+        this.socialAuthService.signOut().finally(() => {
+            document.cookie = "x-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            sessionStorage.removeItem('scrollY');
+            sessionStorage.removeItem('tags');
+            this.router.navigate(['sign-in']);
+            this.updateUserState();
+        });
     }
 
     private updateUserState(): void {

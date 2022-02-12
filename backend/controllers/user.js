@@ -89,10 +89,10 @@ module.exports = {
         },
 
         login: (req, res, next) => {
-            const { username, password, isFacebook } = req.body;
+            const { username, password, isGoogle } = req.body;
 
             models.User.findOne({ username })
-                .then((user) => Promise.all([user, !isFacebook ? (user ? user.matchPassword(password) : false) : true]))
+                .then((user) => Promise.all([user, !isGoogle ? (user ? user.matchPassword(password) : false) : true]))
                 .then(([user, match]) => {
                     if (!match) {
                         res.status(401).send('User does not exist');

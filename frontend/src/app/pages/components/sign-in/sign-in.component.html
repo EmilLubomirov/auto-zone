@@ -50,8 +50,12 @@
                 </div>
             </form>
         </mat-card-content>
-        <mat-card-footer>
-            <button mat-raised-button color="primary" class="btn-sign-up" (click)="handleSubmit()">Sign in</button>
+        <mat-card-footer class="footer">
+            <button mat-raised-button color="primary" class="btn-sign-in" (click)="handleSubmit()">Sign in</button>
+            <button mat-raised-button color="primary" class="btn-sign-in google-sign-in" (click)="handleGoogleSignIn()">
+                <img class="google-icon" src="/assets/google-icon.png"/>
+                Sign in with Google
+            </button>
         </mat-card-footer>
     </mat-card>
 </div>

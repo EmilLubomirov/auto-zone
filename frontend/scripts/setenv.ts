@@ -14,7 +14,8 @@ const environmentFileContent = `
 export const environment = {
    production: ${isProduction},
    ANGULAR_APP_CLOUD_NAME: "${process.env.ANGULAR_APP_CLOUD_NAME}",
-   ANGULAR_APP_UPLOAD_PRESET: "${process.env.ANGULAR_APP_UPLOAD_PRESET}"
+   ANGULAR_APP_UPLOAD_PRESET: "${process.env.ANGULAR_APP_UPLOAD_PRESET}",
+   ANGULAR_APP_GOOGLE_APP_ID: "${process.env.ANGULAR_APP_GOOGLE_APP_ID}"
 };
 `;
 // write the content to the respective file

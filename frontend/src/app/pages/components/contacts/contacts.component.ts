@@ -21,7 +21,6 @@ export class ContactsComponent implements OnInit {
     }
 
     handleMapLoad(){
-        console.log('ops')
         this.isMapLoading = false;
     }
 
