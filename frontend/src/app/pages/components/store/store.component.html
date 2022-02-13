@@ -1,6 +1,6 @@
 <div [ngClass]="{'page-wrapper': true, 'page-loading': isLoading}">
     <div class="main-content">
-        <div class="filters">
+        <div class="filters" *ngIf="!loadingFilters">
             <div class="filter-tag">
                 <mat-card>
                     <mat-card-header class="header">

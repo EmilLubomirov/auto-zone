@@ -29,6 +29,7 @@ export class StoreComponent implements OnInit, AfterViewChecked {
     pageSizeOptions: number[] = [5, 10, 25, 100];
     isLoading = true;
     scrolled = false;
+    loadingFilters = false;
 
     constructor(private productService: ProductService, private route: ActivatedRoute,
         private router: Router) {
@@ -53,6 +54,11 @@ export class StoreComponent implements OnInit, AfterViewChecked {
         }
         else {
             this.maxPrice = this.maxSliderPrice;
+        }
+
+        if (sessionStorage.getItem("loadingFilters")) {
+            this.loadingFilters = true;
+            sessionStorage.removeItem("loadingFilters")
         }
 
         this.pageSize = 10;
@@ -106,6 +112,10 @@ export class StoreComponent implements OnInit, AfterViewChecked {
             this.products = products;
             this.length = count;
             this.isLoading = false;
+
+            if (this.loadingFilters){
+                this.loadingFilters = false;
+            }
         });
     }
 
@@ -121,6 +131,7 @@ export class StoreComponent implements OnInit, AfterViewChecked {
         sessionStorage.setItem("tags", JSON.stringify(this.selectedProductTags));
         sessionStorage.setItem("minPrice", JSON.stringify(this.minPrice));
         sessionStorage.setItem("maxPrice", JSON.stringify(this.maxPrice));
+        sessionStorage.setItem("loadingFilters", JSON.stringify(true));
     }
 
     onPageChange(event: any): void {
