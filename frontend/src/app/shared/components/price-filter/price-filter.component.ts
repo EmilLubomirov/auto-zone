@@ -10,10 +10,10 @@ import { ChangeContext, LabelType, Options } from "@angular-slider/ngx-slider";
 export class PriceFilterComponent implements OnInit, OnChanges {
     @Input() minValue!: number;
     @Input() maxValue!: number;
+    @Input() currentMinValue!: number;
+    @Input() currentMaxValue!: number;
     @Input() step!: number;
 
-    minSliderPrice!: number;
-    maxSliderPrice!: number;
     isLoading: boolean = true;
     options!: Options;
 
@@ -23,15 +23,12 @@ export class PriceFilterComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         if (this.isLoading) {
-            this.minSliderPrice = this.minValue;
-            this.maxSliderPrice = this.maxValue;
-
             this.options = {
                 floor: this.minValue,
                 ceil: this.maxValue,
                 step: this.step,
                 translate: (value: number, label: LabelType): string => {
-                    if (value === this.maxSliderPrice) {
+                    if (value === this.maxValue) {
                         return (value - this.step) + '+';
                     }
 

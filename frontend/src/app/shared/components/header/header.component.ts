@@ -30,6 +30,9 @@ export class HeaderComponent implements OnInit {
             document.cookie = "x-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             sessionStorage.removeItem('scrollY');
             sessionStorage.removeItem('tags');
+            sessionStorage.removeItem('minPrice');
+            sessionStorage.removeItem('maxPrice');
+            sessionStorage.removeItem('loadingFilters');
             this.router.navigate(['sign-in']);
             this.updateUserState();
         });
