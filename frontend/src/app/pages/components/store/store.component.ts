@@ -1,6 +1,7 @@
 import { ChangeContext } from '@angular-slider/ngx-slider';
 import { AfterViewChecked, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
+import { filter, pairwise } from 'rxjs/operators';
 import { Product } from '../../models/product';
 import { ProductTag } from '../../models/product-tag';
 import { ProductService } from '../../service/product.service';
@@ -80,13 +81,25 @@ export class StoreComponent implements OnInit, AfterViewChecked {
 
             });
 
+        this.router.events
+            .pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise())
+            .subscribe((events: RoutesRecognized[]) => {
+                const prevUrl = events[0].urlAfterRedirects;
+                const currentUrl = events[1].urlAfterRedirects;
+
+                if (prevUrl.startsWith('/store') && !currentUrl.startsWith('/product')) {
+                    sessionStorage.removeItem('scrollY');
+                }
+            });
+
+
         this.getProductTags();
     }
 
     ngAfterViewChecked(): void {
         let newProductsCount = this.products.length;
 
-        if (newProductsCount <= 0 || !this.productsCountChanged(newProductsCount) || this.scrolled){
+        if (newProductsCount <= 0 || !this.productsCountChanged(newProductsCount) || this.scrolled) {
             return;
         }
 
@@ -102,7 +115,7 @@ export class StoreComponent implements OnInit, AfterViewChecked {
 
     getProducts(): void {
         const maxPriceFilter = this.maxPrice === this.maxSliderPrice ? Number.MAX_SAFE_INTEGER : this.maxPrice;
-        
+
         this.productService.getProductsPaged(this.pageIndex, this.pageSize, this.selectedProductTags, this.minPrice, maxPriceFilter).subscribe(response => {
             const {
                 products,
@@ -113,7 +126,7 @@ export class StoreComponent implements OnInit, AfterViewChecked {
             this.length = count;
             this.isLoading = false;
 
-            if (this.loadingFilters){
+            if (this.loadingFilters) {
                 this.loadingFilters = false;
             }
         });
@@ -127,15 +140,13 @@ export class StoreComponent implements OnInit, AfterViewChecked {
 
     handleProductClick(id: string): void {
         sessionStorage.setItem('scrollY', window.scrollY.toString());
-        this.router.navigate(['/product', id]);
-        sessionStorage.setItem("tags", JSON.stringify(this.selectedProductTags));
-        sessionStorage.setItem("minPrice", JSON.stringify(this.minPrice));
-        sessionStorage.setItem("maxPrice", JSON.stringify(this.maxPrice));
         sessionStorage.setItem("loadingFilters", JSON.stringify(true));
+        this.router.navigate(['/product', id]);
     }
 
     onPageChange(event: any): void {
         sessionStorage.removeItem('scrollY');
+
         const { pageIndex, pageSize } = event;
 
         if (pageSize !== this.pageSize) {
@@ -150,8 +161,6 @@ export class StoreComponent implements OnInit, AfterViewChecked {
     }
 
     onTagChange(tagName: string, event: any): void {
-        sessionStorage.removeItem('scrollY');
-
         if (event.checked) {
             this.selectedProductTags.push(tagName);
         }
@@ -167,12 +176,14 @@ export class StoreComponent implements OnInit, AfterViewChecked {
             this.getProducts();
             this.isLoading = true;
         }
+
+        sessionStorage.setItem("tags", JSON.stringify(this.selectedProductTags));
     }
 
-    onPriceRangeChange(changeContext: ChangeContext){
+    onPriceRangeChange(changeContext: ChangeContext) {
         const { value, highValue } = changeContext;
 
-        if (value !== this.minPrice || highValue !== this.maxPrice){
+        if (value !== this.minPrice || highValue !== this.maxPrice) {
             this.minPrice = value;
             this.maxPrice = highValue!;
 
@@ -184,6 +195,9 @@ export class StoreComponent implements OnInit, AfterViewChecked {
                 this.getProducts();
                 this.isLoading = true;
             }
+
+            sessionStorage.setItem("minPrice", JSON.stringify(this.minPrice));
+            sessionStorage.setItem("maxPrice", JSON.stringify(this.maxPrice));
         }
     }
 
