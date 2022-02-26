@@ -45,3 +45,9 @@ img{
     margin-top: 10px;
     max-width: 100%;
 }
+
+@media only screen and (max-width: 500px) {
+    .product-card{
+        width: fit-content;
+    }
+}

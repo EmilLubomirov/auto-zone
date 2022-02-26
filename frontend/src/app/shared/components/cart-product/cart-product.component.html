@@ -1,6 +1,6 @@
 <mat-card class="product-card">
     <img mat-card-image src="{{cartProduct.product.imageUrl}}" alt="Photo of a Product">
-    <div>
+    <div class="quantity">
         <mat-label>Qty</mat-label>
         <mat-select [formControl]="quantity" (selectionChange)="handleAmountChange($event)" required>
             <mat-option *ngFor="let quantity of quantities" [value]="quantity">
@@ -8,7 +8,7 @@
             </mat-option>
         </mat-select>
     </div>
-    <mat-card-content>
+    <mat-card-content class="title-wrapper">
         <a routerLink="/product/{{cartProduct.product._id}}" class="title">
             {{cartProduct.product.title}}
         </a>

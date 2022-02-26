@@ -145,6 +145,12 @@ export class StoreComponent implements OnInit, AfterViewChecked {
     }
 
     onPageChange(event: any): void {
+        if (this.products.length === 0){
+            this.pageIndex = 1;
+            this.changeRoute();
+            return;
+        }
+
         sessionStorage.removeItem('scrollY');
 
         const { pageIndex, pageSize } = event;

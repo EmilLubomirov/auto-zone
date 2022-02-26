@@ -33,6 +33,20 @@
     margin-top: 20px;
 }
 
+.tag-label{
+    display: block;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.make-appointment-form input {
+    margin-top: 25px;
+}
+
+.hour-wrapper{
+    margin: 25px 0;
+}
+
 .date{
     margin-top: 20px;
 }
@@ -50,5 +64,5 @@
 }
 
 .btn-finish{
-    margin: 10px 0;
+    margin: 20px 0;
 }

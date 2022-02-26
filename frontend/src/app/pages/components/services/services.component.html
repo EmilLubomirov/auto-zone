@@ -106,10 +106,11 @@
                         </div>
                     </div>
 
-                    <div>
+                    <div class="hour-wrapper">
+                        <mat-label class="tag-label">Hour</mat-label>
                         <input [formControl]="hour" type="time" id="appt" name="appt" min="09:00" max="19:00" required>
                         <div *ngIf="hour.invalid && (hour.dirty || hour.touched)"
-                            class="alert alert-danger invalid-field">
+                            class="alert alert-danger invalid-field invalid-hour">
 
                             <div *ngIf="hour.errors && hour.hasError('required')">
                                 Hour is required.
@@ -117,8 +118,8 @@
                         </div>
                     </div>
 
-                    <div>
-                        <mat-label>Tag</mat-label>
+                    <div class="service-type-wrapper">
+                        <mat-label class="tag-label">Tag</mat-label>
                         <mat-select [formControl]="tag" required>
                             <mat-option *ngFor="let tag of tags" [value]="tag">
                                 {{tag.name}}

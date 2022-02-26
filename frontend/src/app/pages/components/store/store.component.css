@@ -1,7 +1,3 @@
-.page-loading {
-    height: 100vh;
-}
-
 .main-content{
     display: flex;
 }
@@ -135,7 +131,7 @@
 
 @media only screen and (max-width: 470px) {
     .products-wrapper{
-        grid-template-columns: repeat(1, 88%);
+        grid-template-columns: repeat(1, 90%);
         margin: 0 auto;
     }
 
@@ -154,5 +150,9 @@
     .filters{
         flex-grow: 0.4;
         margin-bottom: 20px;
+    }
+
+    .loader{
+        top: 800px;
     }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { OrderService } from '../../service/order.service';
 
 @Component({
@@ -33,6 +33,10 @@ export class OrderComponent implements OnInit {
         this.route.params.subscribe(params => {
             this.userId = params['userId'];
         });
+
+        if (!window.history.state.totalPrice){
+            this.router.navigate(['/store']);
+        }
 
         this.totalPrice = window.history.state ? window.history.state.totalPrice : '0.00'; 
     }

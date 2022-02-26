@@ -24,3 +24,9 @@
 .btn-sign-up{
     margin-top: 10px;
 }
+
+@media only screen and (max-width: 600px) {
+    .wrapper{
+        width: fit-content;
+    }
+}
